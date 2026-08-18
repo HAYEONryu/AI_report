@@ -1,6 +1,6 @@
 {
   "report_date": "2026-08-18",
-  "generated_at": "2026-08-18T11:20:08.673991+09:00",
+  "generated_at": "2026-08-18T14:17:18.683892+09:00",
   "sections": {
     "prices": {
       "status": "ok",
@@ -10,22 +10,22 @@
         {
           "key": "copper",
           "label": "구리 선물 (COMEX HG)",
-          "price": 6.577,
+          "price": 6.565,
           "unit": "USD/lb",
           "prev_price": 6.732999801635742,
           "prev_basis": "2026-08-17",
-          "change": -0.156,
-          "change_pct": -2.3169
+          "change": -0.168,
+          "change_pct": -2.4952
         },
         {
           "key": "wti",
           "label": "WTI 원유",
-          "price": 85.029999,
+          "price": 85.260002,
           "unit": "USD/bbl",
           "prev_price": 81.70999908447266,
           "prev_basis": "2026-08-17",
-          "change": 3.32,
-          "change_pct": 4.0632
+          "change": 3.550003,
+          "change_pct": 4.3446
         },
         {
           "key": "usdkrw",
@@ -40,48 +40,520 @@
       ]
     },
     "calendar": {
-      "status": "failed",
+      "status": "ok",
       "week_start": "2026-08-17",
       "week_end": "2026-08-23",
-      "events": []
+      "events": [
+        {
+          "date": "2026-08-17",
+          "time_kst": "16:00",
+          "country": "CN",
+          "importance": 2,
+          "name": "Fixed Asset Investment (YoY) (Jul)",
+          "actual": "-6.7%",
+          "forecast": "-6.2%",
+          "previous": "-5.7%",
+          "is_released": true
+        },
+        {
+          "date": "2026-08-17",
+          "time_kst": "16:00",
+          "country": "CN",
+          "importance": 2,
+          "name": "Industrial Production (YoY) (Jul)",
+          "actual": "4.5%",
+          "forecast": "5.0%",
+          "previous": "5.3%",
+          "is_released": true
+        },
+        {
+          "date": "2026-08-17",
+          "time_kst": "16:00",
+          "country": "CN",
+          "importance": 2,
+          "name": "Chinese Industrial Production YTD  (YoY) (Jul)",
+          "actual": "5.3%",
+          "forecast": null,
+          "previous": "5.4%",
+          "is_released": true
+        },
+        {
+          "date": "2026-08-17",
+          "time_kst": "16:00",
+          "country": "CN",
+          "importance": 2,
+          "name": "Chinese Unemployment Rate (Jul)",
+          "actual": "5.2%",
+          "forecast": "5.1%",
+          "previous": "5.0%",
+          "is_released": true
+        },
+        {
+          "date": "2026-08-17",
+          "time_kst": "16:00",
+          "country": "CN",
+          "importance": 2,
+          "name": "NBS Press Conference",
+          "actual": null,
+          "forecast": null,
+          "previous": null,
+          "is_released": false
+        },
+        {
+          "date": "2026-08-17",
+          "time_kst": "21:30",
+          "country": "US",
+          "importance": 2,
+          "name": "NY Empire State Manufacturing Index (Aug)",
+          "actual": "20.60",
+          "forecast": "10.60",
+          "previous": "15.60",
+          "is_released": true
+        },
+        {
+          "date": "2026-08-18",
+          "time_kst": "05:00",
+          "country": "US",
+          "importance": 2,
+          "name": "TIC Net Long-Term Transactions (Jun)",
+          "actual": "172.7B",
+          "forecast": null,
+          "previous": "231.2B",
+          "is_released": true
+        },
+        {
+          "date": "2026-08-18",
+          "time_kst": "21:30",
+          "country": "US",
+          "importance": 2,
+          "name": "Building Permits (Jul)",
+          "actual": null,
+          "forecast": "1.370M",
+          "previous": "1.374M",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-18",
+          "time_kst": "21:30",
+          "country": "US",
+          "importance": 2,
+          "name": "Export Price Index (MoM) (Jul)",
+          "actual": null,
+          "forecast": "0.2%",
+          "previous": "-0.6%",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-18",
+          "time_kst": "21:30",
+          "country": "US",
+          "importance": 2,
+          "name": "Housing Starts (MoM) (Jul)",
+          "actual": null,
+          "forecast": null,
+          "previous": "19.0%",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-18",
+          "time_kst": "21:30",
+          "country": "US",
+          "importance": 2,
+          "name": "Housing Starts (Jul)",
+          "actual": null,
+          "forecast": "1.350M",
+          "previous": "1.427M",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-18",
+          "time_kst": "21:30",
+          "country": "US",
+          "importance": 2,
+          "name": "Import Price Index (MoM) (Jul)",
+          "actual": null,
+          "forecast": "0.1%",
+          "previous": "0.3%",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-18",
+          "time_kst": "22:15",
+          "country": "US",
+          "importance": 2,
+          "name": "Industrial Production (MoM) (Jul)",
+          "actual": null,
+          "forecast": "0.3%",
+          "previous": "0.1%",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-18",
+          "time_kst": "22:15",
+          "country": "US",
+          "importance": 2,
+          "name": "Industrial Production (YoY) (Jul)",
+          "actual": null,
+          "forecast": null,
+          "previous": "1.14%",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-18",
+          "time_kst": "23:00",
+          "country": "US",
+          "importance": 2,
+          "name": "Pending Home Sales (MoM) (Jul)",
+          "actual": null,
+          "forecast": "0.1%",
+          "previous": "-5.4%",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-18",
+          "time_kst": "23:45",
+          "country": "US",
+          "importance": 2,
+          "name": "Atlanta Fed GDPNow (Q3)",
+          "actual": null,
+          "forecast": "4.3%",
+          "previous": "4.3%",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-19",
+          "time_kst": "05:30",
+          "country": "US",
+          "importance": 2,
+          "name": "API Weekly Crude Oil Stock",
+          "actual": null,
+          "forecast": null,
+          "previous": "9.072M",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-19",
+          "time_kst": "23:30",
+          "country": "US",
+          "importance": 3,
+          "name": "Crude Oil Inventories",
+          "actual": null,
+          "forecast": null,
+          "previous": "17.423M",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-19",
+          "time_kst": "23:30",
+          "country": "US",
+          "importance": 2,
+          "name": "Cushing Crude Oil Inventories",
+          "actual": null,
+          "forecast": null,
+          "previous": "1.611M",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-20",
+          "time_kst": "02:00",
+          "country": "US",
+          "importance": 2,
+          "name": "20-Year Bond Auction",
+          "actual": null,
+          "forecast": null,
+          "previous": "5.163%",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-20",
+          "time_kst": "03:00",
+          "country": "US",
+          "importance": 3,
+          "name": "FOMC Meeting Minutes",
+          "actual": null,
+          "forecast": null,
+          "previous": null,
+          "is_released": false
+        },
+        {
+          "date": "2026-08-20",
+          "time_kst": "10:00",
+          "country": "CN",
+          "importance": 2,
+          "name": "China Loan Prime Rate 5Y (Aug)",
+          "actual": null,
+          "forecast": "3.50%",
+          "previous": "3.50%",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-20",
+          "time_kst": "10:15",
+          "country": "CN",
+          "importance": 2,
+          "name": "PBoC Loan Prime Rate",
+          "actual": null,
+          "forecast": "3.00%",
+          "previous": "3.00%",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-20",
+          "time_kst": "21:30",
+          "country": "US",
+          "importance": 2,
+          "name": "Continuing Jobless Claims",
+          "actual": null,
+          "forecast": null,
+          "previous": "1,777K",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-20",
+          "time_kst": "21:30",
+          "country": "US",
+          "importance": 3,
+          "name": "Initial Jobless Claims",
+          "actual": null,
+          "forecast": "210K",
+          "previous": "209K",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-20",
+          "time_kst": "21:30",
+          "country": "US",
+          "importance": 3,
+          "name": "Philadelphia Fed Manufacturing Index (Aug)",
+          "actual": null,
+          "forecast": "24.3",
+          "previous": "41.4",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-20",
+          "time_kst": "21:30",
+          "country": "US",
+          "importance": 2,
+          "name": "Philly Fed Employment (Aug)",
+          "actual": null,
+          "forecast": null,
+          "previous": "10.0",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-20",
+          "time_kst": "23:00",
+          "country": "US",
+          "importance": 2,
+          "name": "US Leading Index (MoM) (Jul)",
+          "actual": null,
+          "forecast": "0.1%",
+          "previous": "-0.2%",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-21",
+          "time_kst": "02:00",
+          "country": "US",
+          "importance": 2,
+          "name": "30-Year TIPS Auction",
+          "actual": null,
+          "forecast": null,
+          "previous": "2.473%",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-21",
+          "time_kst": "05:30",
+          "country": "US",
+          "importance": 2,
+          "name": "Fed's Balance Sheet",
+          "actual": null,
+          "forecast": null,
+          "previous": "6,760B",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-21",
+          "time_kst": "22:45",
+          "country": "US",
+          "importance": 3,
+          "name": "S&P Global Manufacturing PMI (Aug)",
+          "actual": null,
+          "forecast": "54.0",
+          "previous": "53.9",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-21",
+          "time_kst": "22:45",
+          "country": "US",
+          "importance": 2,
+          "name": "S&P Global Composite PMI (Aug)",
+          "actual": null,
+          "forecast": null,
+          "previous": "54.5",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-21",
+          "time_kst": "22:45",
+          "country": "US",
+          "importance": 3,
+          "name": "S&P Global Services PMI (Aug)",
+          "actual": null,
+          "forecast": "53.9",
+          "previous": "54.6",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-22",
+          "time_kst": "02:00",
+          "country": "US",
+          "importance": 2,
+          "name": "U.S. Baker Hughes Oil Rig Count",
+          "actual": null,
+          "forecast": null,
+          "previous": "455",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-22",
+          "time_kst": "02:00",
+          "country": "US",
+          "importance": 2,
+          "name": "U.S. Baker Hughes Total Rig Count",
+          "actual": null,
+          "forecast": null,
+          "previous": "593",
+          "is_released": false
+        }
+      ]
     },
     "news": {
-      "status": "failed",
-      "reason": "NAVER_CLIENT_ID/SECRET 미설정",
-      "items": []
+      "status": "ok",
+      "items": [
+        {
+          "title": "IT·전자 분야 수출 호조에 대구경북 수출경기 반등",
+          "link": "https://n.news.naver.com/mnews/article/088/0001024007?sid=101",
+          "description": "대구세관 관계자는 \"대구 수입은 화공품, 기계류·정밀기기, 비철금속, 내구소비재 관련 품목에서 늘었다. 경북에선 광물, 연료, 전기전자기기 품목 수입이 늘었으나 화공품, 철강재는 감소한 것으로 나왔다\"고...",
+          "press": "imaeil.com",
+          "published_at": "2026-08-18T14:11:00+09:00",
+          "summary": ""
+        },
+        {
+          "title": "LS 상반기 영업이익 '지난해 실적' 초과",
+          "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=52216",
+          "description": "산업의 근간인 전기동 생산부터 송전-변전-배전에 이르는 전력 인프라 전 과정에서 독보적인 통합... LS MnM은 전기동 강세와 귀금속 및 황산 제품 가격 상승에 힘입어 영업이익이 크게 개선됐다. LS아이앤디는 북미...",
+          "press": "koreareport.co.kr",
+          "published_at": "2026-08-18T13:38:00+09:00",
+          "summary": ""
+        },
+        {
+          "title": "AI·전력망 수요 폭발…LS그룹, 상반기 만에 연간 영업익 넘어섰다",
+          "link": "http://www.economytalk.kr/news/articleView.html?idxno=423556",
+          "description": "LS는 전기동(銅) 생산부터 송전-변전-배전에 이르는 전력 인프라 등 통합 솔루션을 제공한다. LS전선... LS MnM은 전기동 프리미엄 강세와 귀금속 및 황산 제품 가격 상승에 힘입어 영업이익이 크게 개선됐으며...",
+          "press": "economytalk.kr",
+          "published_at": "2026-08-18T13:30:00+09:00",
+          "summary": ""
+        },
+        {
+          "title": "[재계 포커스] 제련 넘어 배터리로…고려아연 '트로이카 드라이브' 성과...",
+          "link": "https://www.polinews.co.kr/news/articleView.html?idxno=740396",
+          "description": "동박은 구리를 매우 얇게 가공한 소재로 리튬이온배터리의 음극집전체 역할을 한다. 배터리 내부에서 전자가... 단순히 가격 경쟁력만으로 소재를 선택하기보다 어떤 원료를 사용하고 어떤 공급망을 통해 생산했는지까지...",
+          "press": "polinews.co.kr",
+          "published_at": "2026-08-18T12:35:00+09:00",
+          "summary": ""
+        },
+        {
+          "title": "[특징주] 티씨머티리얼즈, 상반기 영업익 102억…구리값·전방산업은 변...",
+          "link": "https://www.newstnt.com/news/articleView.html?idxno=714196",
+          "description": "◆ 최대주주 바이오스마트…구리 가격·전방산업 변수 지배구조에서는 바이오스마트가 최대주주로 확인된다. 2026년 반기 말 기준 바이오스마트의 보유 주식은 1668만1137주로 지분율은 47.61%다. 발행주식총수는...",
+          "press": "newstnt.com",
+          "published_at": "2026-08-18T12:16:00+09:00",
+          "summary": ""
+        },
+        {
+          "title": "[호주 특징주] BHP, 구리값 급등에 순익 30%↑…'철광석→구리' 성장축 ...",
+          "link": "https://www.newspim.com/news/view/20260818000704",
+          "description": "권지언 특파원 = 세계 최대 광산업체 BHP그룹의 연간 이익이 구리 가격 급등에 힘입어 시장 예상을 웃돌았다. 특히 구리가 사상 처음으로 철광석을 제치고 최대 수익원으로 올라서면서 BHP의 성장 전략이...",
+          "press": "newspim.com",
+          "published_at": "2026-08-18T11:59:00+09:00",
+          "summary": ""
+        },
+        {
+          "title": "잠비아 히칠레마 재선 성공…개표중단 잡음 속 60% 득표",
+          "link": "https://n.news.naver.com/mnews/article/421/0009118777?sid=104",
+          "description": "개선하고 구리 산업 투자를 유치했다. 또한 중등교육 무상화와 사회보장 지출을 늘려 서민층의 지지를 확보했다. 그러나 많은 잠비아 국민들은 여전히 생활비와 식료품 가격 부담을 호소하고 있다. 야당, 시민사회단체...",
+          "press": "news1.kr",
+          "published_at": "2026-08-18T11:58:00+09:00",
+          "summary": ""
+        },
+        {
+          "title": "고려아연 '프로젝트 크루서블', 한·미 핵심광물 공급망으로 떠올라",
+          "link": "https://www.handmk.com/news/articleView.html?idxno=42242",
+          "description": "국제에너지기구(IEA)는 최근 발간한 '2026 글로벌 핵심광물 전망' 보고서에서 \"핵심광물은 에너지산업을 넘어 AI, 반도체, 방위산업 등 국가 전략산업 전반의 성패를 가르는 기반\"이라며 \"비철금속 제련소를 핵심광물을...",
+          "press": "handmk.com",
+          "published_at": "2026-08-18T11:26:00+09:00",
+          "summary": ""
+        },
+        {
+          "title": "대구본부세관 2026년 7월 대구·경북지역 수출입 현황 공개",
+          "link": "http://www.intn.co.kr/news/articleView.html?idxno=2052622",
+          "description": "수입의 경우 화공품(46.4%), 기계류와 정밀기기(104.0%), 비철금속(94.7%), 내구소비재(9.6%)는 증가했고, 전기전자기기(△3.6%)는 감소했다. 국가별 수출은 중국(24.7%), 미국(12.9%), EU(0.6%), 중남미(49.0%)는...",
+          "press": "intn.co.kr",
+          "published_at": "2026-08-18T11:24:00+09:00",
+          "summary": ""
+        },
+        {
+          "title": "서울 아파트값 상승에 경기로 눈 돌리는 수요…별내 교통망·신규 공급...",
+          "link": "https://n.news.naver.com/mnews/article/016/0002684996?sid=101",
+          "description": "서울 아파트 가격 상승으로 매수 부담이 커지면서 상대적으로 가격 부담이 낮은 경기 지역으로 눈을... 지역별로는 광명시 34.1%, 하남시 33.4%, 구리시 32.4%, 고양 덕양구 29.0%, 안양 동안구 28.9% 등으로 집계됐다. 최근...",
+          "press": "biz.heraldcorp.com",
+          "published_at": "2026-08-18T11:14:00+09:00",
+          "summary": ""
+        }
+      ]
     },
     "inventory": {
-      "status": "failed",
-      "reason": "AI 추출/검증 실패",
-      "lme": [],
-      "comex": []
+      "status": "ok",
+      "source_date": "2026-08-17",
+      "source_url": "https://www.futures.co.kr/common/BbsFileDown.do;jsessionid=7F086F1F4C621C6CFB0FFFA34483A7EA.KOR11?atchFileId=FILE_000000000033761&FileNm=NHF+Daily+Metal+Bulletin+20260817.pdf",
+      "lme": [
+        {
+          "metal": "Copper",
+          "prev": 204975,
+          "current": 207825,
+          "change": 2850,
+          "unit": "톤"
+        }
+      ],
+      "comex": [
+        {
+          "metal": "Copper",
+          "prev": 733653,
+          "current": 735470,
+          "change": 1817,
+          "unit": "숏톤"
+        }
+      ]
     }
   },
   "commentary": {
-    "headline": "코멘터리 생성 실패",
-    "body": [],
-    "implication": ""
+    "headline": "전기동 가격 하락이 진행되고 있습니다.",
+    "body": [
+      "구리 선물 가격이 8월 17일 기준 전일 대비 2.4952% 하락하여 6.565 USD/lb로 거래되었습니다.",
+      "금속 재고량은 LME에서 2,850톤, COMEX에서 1,817숏톤 증가하며 물량 압박을 나타내고 있습니다.",
+      "중국의 고정 자산 투자와 산업 생산의 하향 조정은 수요 감소를 시사하여 구리 시장의 추가 약세를 야기할 수 있습니다."
+    ],
+    "implication": "구리 가격 하락과 재고 증가로 전선 제조의 원가 절감 가능성이 확대됩니다."
   },
   "errors": [
     {
-      "section": "calendar",
-      "reason": "파싱된 이벤트 0건 — investing.com 마크업 구조 변경 가능성",
-      "fallback": "캐시 없음"
-    },
-    {
       "section": "news",
-      "reason": "NAVER_CLIENT_ID/SECRET 미설정",
-      "fallback": "없음"
-    },
-    {
-      "section": "inventory",
-      "reason": "AI 추출/검증 실패",
-      "fallback": "캐시 없음"
-    },
-    {
-      "section": "commentary",
-      "reason": "AI 코멘터리 생성 실패",
-      "fallback": "기본 문구 사용"
+      "reason": "AI 요약 실패",
+      "fallback": "제목/링크만 노출"
     }
   ]
 }

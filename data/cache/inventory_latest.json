@@ -1,0 +1,23 @@
+{
+  "status": "ok",
+  "source_date": "2026-08-17",
+  "source_url": "https://www.futures.co.kr/common/BbsFileDown.do;jsessionid=7F086F1F4C621C6CFB0FFFA34483A7EA.KOR11?atchFileId=FILE_000000000033761&FileNm=NHF+Daily+Metal+Bulletin+20260817.pdf",
+  "lme": [
+    {
+      "metal": "Copper",
+      "prev": 204975,
+      "current": 207825,
+      "change": 2850,
+      "unit": "톤"
+    }
+  ],
+  "comex": [
+    {
+      "metal": "Copper",
+      "prev": 733653,
+      "current": 735470,
+      "change": 1817,
+      "unit": "숏톤"
+    }
+  ]
+}
