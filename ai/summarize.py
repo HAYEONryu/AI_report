@@ -10,7 +10,8 @@ logger = logging.getLogger(__name__)
 SYSTEM_PROMPT = (
     "구리/전기동 시황 관련성을 1~5로 평가하고, 관련 기사에 한해 한국어 2문장 요약을 작성한다. "
     "경기도 구리시 등 지명 '구리'와 무관한 기사는 relevance를 1로 매기고 summary는 빈 문자열로 둔다. "
-    'JSON 배열로만 응답한다. 형식: [{"index": <int>, "relevance": <1-5>, "summary": "<string>"}]'
+    "JSON 객체로만 응답한다 (배열 아님). 형식: "
+    '{"results": [{"index": <int>, "relevance": <1-5>, "summary": "<string>"}]}'
 )
 
 
@@ -29,4 +30,7 @@ def summarize_news(candidates):
     except Exception as exc:
         logger.error("summarize_news call failed: %s", exc)
         return None
-    return result if isinstance(result, list) else None
+    if not isinstance(result, dict):
+        return None
+    results = result.get("results")
+    return results if isinstance(results, list) else None
