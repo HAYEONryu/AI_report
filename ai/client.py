@@ -1,14 +1,18 @@
-"""Shared Anthropic client + strict-JSON response parsing (SPEC.md §5).
+"""Shared OpenAI client + strict-JSON response parsing (SPEC.md §5, adapted for OpenAI).
 
 Every caller in ai/ treats a None return as "AI layer unavailable" and
 degrades the corresponding report section instead of raising — the pipeline
 must keep going even if every AI call fails (SPEC.md §8 rule 1).
+
+OpenAI's `response_format={"type": "json_object"}` guarantees valid JSON
+syntax natively, so unlike a code-fence-stripping approach there's no
+markdown to strip — the only thing that can still go wrong is the JSON not
+matching the shape callers expect, which they validate themselves.
 """
 import json
 import logging
-import re
 
-import anthropic
+from openai import OpenAI, OpenAIError
 
 logger = logging.getLogger(__name__)
 _client = None
@@ -17,13 +21,8 @@ _client = None
 def _get_client():
     global _client
     if _client is None:
-        _client = anthropic.Anthropic()
+        _client = OpenAI()
     return _client
-
-
-def _strip_code_fence(text):
-    match = re.search(r"```(?:json)?\s*(.*?)\s*```", text, re.DOTALL)
-    return match.group(1) if match else text
 
 
 def call_json(system, user, model, max_tokens=2000):
@@ -33,15 +32,17 @@ def call_json(system, user, model, max_tokens=2000):
     strict_system = system
     for attempt in range(2):
         try:
-            response = client.messages.create(
+            response = client.chat.completions.create(
                 model=model,
-                max_tokens=max_tokens,
-                system=strict_system,
-                messages=[{"role": "user", "content": user}],
+                max_completion_tokens=max_tokens,
+                response_format={"type": "json_object"},
+                messages=[
+                    {"role": "system", "content": strict_system},
+                    {"role": "user", "content": user},
+                ],
             )
-            text = "".join(block.text for block in response.content if block.type == "text")
-            return json.loads(_strip_code_fence(text))
-        except (json.JSONDecodeError, anthropic.AnthropicError) as exc:
+            return json.loads(response.choices[0].message.content)
+        except (json.JSONDecodeError, OpenAIError) as exc:
             logger.warning("AI call attempt %d/2 failed: %s", attempt + 1, exc)
-            strict_system = system + "\n\n반드시 순수 JSON만 응답하라. 코드펜스, 설명, 마크다운을 절대 포함하지 마라."
+            strict_system = system + "\n\n반드시 순수 JSON 객체만 응답하라. 설명이나 마크다운을 절대 포함하지 마라."
     return None

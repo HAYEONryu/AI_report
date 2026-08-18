@@ -46,13 +46,13 @@ NEWS_BLACKLIST_TERMS = ["구리시", "구리역", "구리도매시장", "남양�
 NHF_BOARD_URL = "https://www.futures.co.kr/content/Getcontent.do?content=3000031"
 NHF_BASE_URL = "https://www.futures.co.kr"
 
-# --- AI models ---
-AI_MODEL_EXTRACT = "claude-haiku-4-5-20251001"
-AI_MODEL_SUMMARIZE = "claude-haiku-4-5-20251001"
-AI_MODEL_COMMENTARY = "claude-sonnet-5"
+# --- AI models (OpenAI) ---
+AI_MODEL_EXTRACT = "gpt-4o-mini"
+AI_MODEL_SUMMARIZE = "gpt-4o-mini"
+AI_MODEL_COMMENTARY = "gpt-4o"
 
 # --- Delivery ---
-SMTP_HOST = "smtp.gmail.com"
+SMTP_HOST = "mail.hoban.co.kr"
 SMTP_PORT = 587
 MAIL_TO = os.environ.get("MAIL_TO", "hannau416@gmail.com")
 

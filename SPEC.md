@@ -3,6 +3,14 @@
 > 이 문서를 Claude Code에 그대로 전달하세요.
 > 프로젝트 루트에 `SPEC.md`로 저장해두면 이후 세션에서도 컨텍스트로 재사용할 수 있습니다.
 
+> **2026-08-18 구현 중 실제로 바뀐 확정 사항 (원본 문서는 아래 그대로 보존, 최신 상태는 test.md 참고):**
+> - **AI: Anthropic → OpenAI로 전환.** 사용자가 명시적으로 요청. `ai/client.py`는 OpenAI SDK +
+>   `response_format={"type":"json_object"}` 사용. 모델: 추출/요약 `gpt-4o-mini`, 코멘터리 `gpt-4o`.
+>   시크릿명도 `ANTHROPIC_API_KEY` → `OPENAI_API_KEY`로 바뀜.
+> - **발송: Gmail → 회사 메일 서버(`mail.hoban.co.kr:587`, STARTTLS)로 전환.** 메커니즘은 동일(SMTP+STARTTLS).
+> - **calendar.py는 GitHub Actions IP에서 Cloudflare에 통째로 막혀** `cloudflare-worker/calendar-proxy.js`
+>   (무료 티어) 경유로 우회. 로컬 개발은 기존 curl_cffi 직접 호출로 폴백.
+
 ---
 
 ## 0. 역할 및 목표
