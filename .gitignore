@@ -6,3 +6,7 @@ venv/
 .claude/
 data/reports/preview.html
 logs/
+.vscode/
+.wrangler/
+node_modules/
+Thumbs.db

@@ -3,13 +3,9 @@
 > 이 문서를 Claude Code에 그대로 전달하세요.
 > 프로젝트 루트에 `SPEC.md`로 저장해두면 이후 세션에서도 컨텍스트로 재사용할 수 있습니다.
 
-> **2026-08-18 구현 중 실제로 바뀐 확정 사항 (원본 문서는 아래 그대로 보존, 최신 상태는 test.md 참고):**
-> - **AI: Anthropic → OpenAI로 전환.** 사용자가 명시적으로 요청. `ai/client.py`는 OpenAI SDK +
->   `response_format={"type":"json_object"}` 사용. 모델: 추출/요약 `gpt-4o-mini`, 코멘터리 `gpt-4o`.
->   시크릿명도 `ANTHROPIC_API_KEY` → `OPENAI_API_KEY`로 바뀜.
-> - **발송: Gmail → 회사 메일 서버(`mail.hoban.co.kr:587`, STARTTLS)로 전환.** 메커니즘은 동일(SMTP+STARTTLS).
-> - **calendar.py는 GitHub Actions IP에서 Cloudflare에 통째로 막혀** `cloudflare-worker/calendar-proxy.js`
->   (무료 티어) 경유로 우회. 로컬 개발은 기존 curl_cffi 직접 호출로 폴백.
+> **2026-08-18: 아래 본문은 실제 구현 결과를 반영해 갱신했습니다.** 원래 확정 사항(Anthropic, Gmail,
+> GitHub Actions 전체 자동화)에서 실제로 바뀐 부분은 본문 각 절에 인라인으로 표시해뒀습니다. 세션 중
+> 실측/디버깅 기록은 `test.md`, 사용법은 `README.md` 참고.
 
 ---
 
@@ -42,7 +38,7 @@
 | 항목 | 주 소스 | 폴백 | 비고 |
 |---|---|---|---|
 | 시세 | `yfinance` — `HG=F`(구리), `CL=F`(WTI), `KRW=X`(환율) | Stooq CSV | Alpha Vantage / API-Ninjas 사용 금지 (아래 참조) |
-| 경제지표 | **investing.com 공식 위젯** (`sslecal2.investing.com`) | 직전 성공 캐시 | 일반 API 경로는 Cloudflare 403. 위젯만 사용 |
+| 경제지표 | **investing.com 공식 위젯** (`sslecal2.investing.com`) | 직전 성공 캐시 | 일반 API 경로는 Cloudflare 403. 위젯만 사용. **[변경] GitHub Actions IP는 브라우저 TLS 지문 위장(curl_cffi)으로도 통째로 차단되는 것을 실측 확인 — CI에서는 Cloudflare Worker 프록시(`cloudflare-worker/calendar-proxy.js`)를 경유. 로컬 개발은 curl_cffi 직접 호출 폴백** |
 | 뉴스 | 네이버 검색 API(뉴스) | 직전 성공 캐시 | |
 | 재고 | `futures.co.kr` 일일금속시황 PDF | 직전 성공 캐시 | |
 
@@ -54,23 +50,28 @@
 ### 2.2 인프라
 
 - **런타임:** Python 3.11
-- **스케줄링:** GitHub Actions (Private Repo, 무료 티어)
+- **스케줄링:** 선수집(`morning-collect.yml`)은 GitHub Actions 그대로. **[변경] 발송(`main.py`)은
+  GitHub 호스티드/self-hosted 러너 모두 사내 메일 서버에 도달 불가라 로컬 PC의 Windows 작업
+  스케줄러(`scripts/run_daily.ps1`, 평일 15:50 KST)로 이전.**
 - **상태 저장:** 리포지토리 내 `data/` 디렉터리에 커밋 (별도 DB 없음)
-- **발송:** Gmail SMTP + 앱 비밀번호, HTML 메일
-- **AI:** Anthropic API
+- **발송:** **[변경]** 회사 메일 서버 SMTP(`mail.ihoban.co.kr:587`, STARTTLS) + 계정 비밀번호
+  (Gmail이 아님 — 메커니즘은 SMTP+STARTTLS로 동일)
+- **AI:** **[변경] OpenAI API** (Anthropic이 아님 — 사용자가 명시적으로 전환 요청)
 
 ### 2.3 의존성
 
 ```
 yfinance
 requests
+curl_cffi        # [추가] investing.com Cloudflare TLS 지문 차단 우회
 beautifulsoup4
 lxml
 pandas
 pdfplumber
 jinja2
 tenacity
-anthropic
+openai           # [변경] anthropic 대신
+python-dotenv    # [추가] 로컬 실행 시 .env 로딩 (Task Scheduler는 셸 환경변수 상속 안 함)
 ```
 
 Playwright/Selenium은 **원칙적으로 사용하지 않습니다.** (§4.4 참조)
@@ -257,22 +258,24 @@ KST 15:00은 UTC 06:00이며 COMEX 전자장이 거래 중인 시각입니다. �
 **원칙: AI는 "비정형 → 정형" 변환과 "문장 생성"에만 씁니다.**
 
 ### 5.1 PDF 표 추출 — `extract_inventory()`
-- 모델: `claude-haiku-4-5-20251001`
+- 모델: **[변경] `gpt-4o-mini`** (원래 `claude-haiku-4-5-20251001`)
 - 입력: PDF 해당 페이지 텍스트 (~1,500 토큰)
 - 시스템 프롬프트 요지:
   > 원자재 리포트 텍스트에서 LME Stocks와 COMEX 재고 수치를 추출한다. 지정된 JSON 스키마로만 응답하고 마크다운 코드펜스나 설명은 붙이지 않는다. 텍스트에 없는 값은 절대 추측하지 말고 null로 둔다.
 - 출력: `sections.inventory` 스키마
 
 ### 5.2 뉴스 배치 요약 — `summarize_news()`
-- 모델: `claude-haiku-4-5-20251001`
+- 모델: **[변경] `gpt-4o-mini`** (원래 `claude-haiku-4-5-20251001`)
 - **반드시 전체 기사를 1회 호출로 처리.** 기사당 1회 호출 금지
 - 입력: 후보 20~30건의 `{title, description, press, published_at}` 배열
 - 시스템 프롬프트 요지:
-  > 구리/전기동 시황 관련성을 1~5로 평가하고, 관련 기사에 한해 한국어 2문장 요약을 작성한다. 경기도 구리시 등 지명 '구리'와 무관한 기사는 relevance 1로 매긴다. JSON 배열로만 응답한다.
-- 출력: `[{index, relevance, summary}]` → 코드에서 원본과 병합 후 상위 10건 선별
+  > 구리/전기동 시황 관련성을 1~5로 평가하고, 관련 기사에 한해 한국어 2문장 요약을 작성한다. 경기도 구리시 등 지명 '구리'와 무관한 기사는 relevance 1로 매긴다. JSON 객체로만 응답한다.
+- 출력: **[변경]** `{"results": [{index, relevance, summary}]}` — OpenAI의 JSON 모드는 최상위가
+  반드시 객체여야 해서 배열 그대로는 안 됩니다(실측: 배열로 요청했더니 다른 형태로 감싸서 응답,
+  파싱 실패). 코드에서 `results`를 원본과 병합 후 상위 10건 선별
 
 ### 5.3 데일리 코멘터리 — `write_commentary()`
-- 모델: `claude-sonnet-5`
+- 모델: **[변경] `gpt-4o`** (원래 `claude-sonnet-5`)
 - 입력: 완성된 `sections` 전체 (시세·지표·뉴스·재고)
 - 시스템 프롬프트 요지:
   > 전선/케이블 제조사 실무자를 위한 원자재 브리핑을 작성한다. headline 1줄, body 3~5문장, implication(원가 관점 시사점) 1줄. 주어진 데이터에 없는 수치나 사건은 절대 언급하지 않는다. 숫자는 입력값을 그대로 인용한다.
@@ -292,7 +295,8 @@ KST 15:00은 UTC 06:00이며 COMEX 전자장이 거래 중인 시각입니다. �
 - 5.2 실패 → 요약 없이 제목+링크만 노출
 - 5.3 실패 → 코멘터리 섹션 생략
 
-응답 파싱 시 ` ```json ` 코드펜스를 제거한 뒤 `json.loads`, 실패하면 1회 재시도.
+**[변경]** OpenAI `response_format={"type": "json_object"}`로 순수 JSON을 강제 — 코드펜스가 아예
+안 붙으므로 별도 스트리핑 불필요. `json.loads` 실패 시 1회 재시도(더 엄격한 지시문 추가).
 
 ---
 
@@ -308,7 +312,8 @@ KST 15:00은 UTC 06:00이며 COMEX 전자장이 거래 중인 시각입니다. �
 - 순서: **코멘터리 → 시세 → 재고 → 경제지표 → 뉴스** (결론 먼저)
 
 ### 6.2 발송 (`deliver.py`)
-- Gmail SMTP (`smtp.gmail.com:587`, STARTTLS) + 앱 비밀번호
+- **[변경]** 회사 메일 서버 SMTP (`mail.ihoban.co.kr:587`, STARTTLS) + 계정 비밀번호
+  (Gmail 아님; 587 포트 STARTTLS라는 메커니즘 자체는 원래 계획과 동일)
 - 제목: `[일일 원자재] 8/18 구리 -1.2% / WTI +0.4% / USDKRW 1,382.50`
 - 본문 HTML + `report.json`을 첨부
 
@@ -336,42 +341,46 @@ on:
 - 재고 PDF, 경제지표, 뉴스 수집 → `data/cache/`에 저장 후 **커밋**
 - **분리 이유:** PDF는 오전에 이미 게시됩니다. 오전에 받아두면 실패해도 재시도할 시간이 5시간 이상 확보됩니다. 무거운 크롤링이 16시 발송을 막지 못하게 하는 것이 목적입니다.
 
-### 7.2 `daily-report.yml` — 조립·발송
+### 7.2 조립·발송 — **[변경] `daily-report.yml`이 아니라 로컬 PC 작업 스케줄러**
 
-```yaml
-on:
-  schedule:
-    - cron: '40 5 * * 1-5'   # UTC 05:40 = KST 14:40
-  workflow_dispatch:
-```
+원래 계획은 `daily-report.yml`을 GitHub Actions cron으로 돌리는 것이었으나, 실제 배포 환경의
+SMTP 서버(`mail.ihoban.co.kr`)가 사내망 전용이라 **GitHub 소유 클라우드 러너로는 도달 자체가
+불가능함을 실측 확인**했습니다 (호스티드 러너, self-hosted 러너 둘 다 시도 — self-hosted도 등록된
+PC가 그 순간 사내망에 없으면 마찬가지로 실패). 그래서 발송은 Windows 작업 스케줄러로 이전했습니다:
 
-실행 순서:
-1. 스크립트 시작 → **KST 15:00:00까지 `sleep`** (Job 최대 6시간이므로 대기 비용 없음)
-2. 시세 스냅샷 수집
-3. `data/cache/`에서 오전 수집분 로드 (없으면 이 시점에 재시도)
-4. 뉴스 최신화
-5. AI 레이어 실행
-6. 렌더링 → 발송
-7. `data/` 커밋
+- 등록: `schtasks /create /tn "AI_Report_Daily" /sc weekly /d MON,TUE,WED,THU,FRI /st 15:50 ...`
+- 실행: `scripts/run_daily.ps1` → `git pull` → `python main.py --now` → `data/` 커밋·푸시
+- 전제조건: 실행 시각(평일 15:50 KST)에 **이 PC가 켜져 있고 사내망/VPN에 연결**되어 있어야 함 —
+  §0의 "사람 개입 0" 목표와 트레이드오프되는 지점 (사용자가 명시적으로 선택)
+- `main.py`의 "KST 15:00:00까지 sleep" 로직은 **이미 지난 시각이면 즉시 진행**하도록 구현되어 있어,
+  15:50에 실행해도 대기 없이 바로 15:00 스냅샷을 잡습니다 (1분봉에서 "15:00 이하 마지막 봉" 채택)
+- `daily-report.yml`은 삭제하지 않고 **`workflow_dispatch` 수동 테스트 전용**으로 남겨뒀습니다
+  (cron 없음, `ubuntu-latest`) — 수집기/AI 레이어만 클라우드에서 빠르게 확인하고 싶을 때 사용,
+  발송 단계는 거기서도 여전히 실패합니다
 
-목표: **15:00 스냅샷 → 16:00 발송**. 실제 파이프라인은 3~5분이면 끝나므로 여유는 충분합니다.
+실측 소요 시간: 수집 4종 + AI 3콜 + 렌더링 + 발송 전체 **약 30초~1분** (여러 차례 실측).
 
 ### 7.3 기타
-- Private Repo 무료 티어 월 2,000분 이내에 충분히 들어갑니다
+- Private Repo 무료 티어 월 2,000분 이내에 충분히 들어갑니다 (`morning-collect.yml`만 클라우드에서 돎)
 - `data/`를 매일 커밋하면 60일 무커밋 시 cron 자동 비활성화 문제도 함께 해결됩니다
-- 커밋은 `github-actions[bot]` 명의, 메시지는 `chore: data {date}`
+- GitHub Actions 커밋은 `github-actions[bot]` 명의, 로컬 스케줄러 커밋은 `local-scheduler` 명의,
+  메시지는 공통으로 `chore: data {date}`
 
 ### 7.4 Secrets
 
 ```
 NAVER_CLIENT_ID
 NAVER_CLIENT_SECRET
-ANTHROPIC_API_KEY
+OPENAI_API_KEY        # [변경] ANTHROPIC_API_KEY 아님
 SMTP_USER
 SMTP_APP_PASSWORD
 MAIL_TO
 ALERT_WEBHOOK_URL
+CALENDAR_PROXY_URL    # [추가] Cloudflare Worker 프록시 URL (§2.1 참고)
 ```
+
+로컬 실행은 GitHub Secrets가 아니라 **`.env` 파일**(gitignored, `python-dotenv`로 로드)에 같은
+값을 둡니다 — Windows 작업 스케줄러는 셸 환경변수를 상속하지 않기 때문입니다.
 
 ---
 
@@ -420,12 +429,17 @@ ALERT_WEBHOOK_URL
 │   ├── news.py
 │   └── inventory.py
 ├── ai/
-│   ├── client.py          # Anthropic 클라이언트 + JSON 파싱 유틸
+│   ├── client.py          # [변경] OpenAI 클라이언트 + JSON 모드
 │   ├── extract.py         # 5.1
 │   ├── summarize.py       # 5.2
 │   └── commentary.py      # 5.3
 ├── templates/
 │   └── report.html.j2
+├── cloudflare-worker/      # [추가] calendar.py용 investing.com 프록시
+│   ├── calendar-proxy.js
+│   └── wrangler.jsonc
+├── scripts/                # [추가]
+│   └── run_daily.ps1       # 로컬 작업 스케줄러가 호출하는 발송 스크립트
 ├── data/
 │   ├── history/prices.csv
 │   ├── cache/
@@ -437,7 +451,8 @@ ALERT_WEBHOOK_URL
 ├── main.py                # 파이프라인 오케스트레이션
 ├── requirements.txt
 ├── .env.example
-└── README.md              # 로컬 실행법 + Secrets 설정법
+├── README.md              # 로컬 실행법 + Secrets 설정법
+└── test.md                # [추가] 모듈별 테스트 방법 + 세션 중 실측 기록
 ```
 
 ---
