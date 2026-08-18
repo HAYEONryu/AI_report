@@ -1,25 +1,22 @@
-name: Daily Report
+name: Daily Report (manual test only)
 
+# No schedule: the actual daily send runs locally via Windows Task
+# Scheduler (scripts/run_daily.ps1, weekdays 15:50 KST) — SMTP_HOST only
+# resolves from inside the company network, which no GitHub-hosted or
+# self-hosted runner here is ever connected to (no runner was ever
+# registered; this job used to target `[self-hosted, Windows]` and could
+# never actually execute). Kept as workflow_dispatch for cheaply testing
+# the collectors + AI layer from the cloud — the send step will still fail
+# on SMTP unless run from the company network.
 on:
-  schedule:
-    - cron: '40 5 * * 1-5' # UTC 05:40 = KST 14:40
   workflow_dispatch:
-    inputs:
-      skip_sleep:
-        description: '즉시 실행 (KST 15:00 대기 건너뛰기, 수동 테스트용)'
-        type: boolean
-        default: true
 
 permissions:
   contents: write
 
 jobs:
   report:
-    # Self-hosted, not ubuntu-latest: SMTP_HOST (mail.hoban.co.kr) only
-    # resolves from inside the company network. Requires a runner registered
-    # on a machine that's actually on that network and online at run time —
-    # see test.md "Self-hosted runner 설정".
-    runs-on: [self-hosted, Windows]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -39,17 +36,10 @@ jobs:
           MAIL_TO: ${{ secrets.MAIL_TO }}
           ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}
           CALENDAR_PROXY_URL: ${{ secrets.CALENDAR_PROXY_URL }}
-        shell: bash
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.skip_sleep }}" = "true" ]; then
-            python main.py --now
-          else
-            python main.py
-          fi
+        run: python main.py --now
 
       - name: Commit report + history
         if: always()
-        shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

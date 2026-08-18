@@ -129,8 +129,6 @@ def main():
 
 
 if __name__ == "__main__":
-    import sys
-
     sys.stdout.reconfigure(encoding="utf-8")  # Windows console defaults to cp949
     sys.stderr.reconfigure(encoding="utf-8")
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")

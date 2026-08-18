@@ -63,7 +63,7 @@ AI_MODEL_COMMENTARY = "gpt-4o"
 # mail.taihan.com was a dead-end guess based on the AD domain, wrong on the
 # server side too). Port 587 is open here (25 also open, 465/995 closed) —
 # matches the original STARTTLS port the user intended. Login/mailbox is
-# @taihan.com, not @taihan.co.kr (mailtest.py confirmed: 235 auth success).
+# @taihan.com, not @taihan.co.kr — confirmed live (235 auth success).
 SMTP_HOST = "mail.ihoban.co.kr"
 SMTP_PORT = 587
 MAIL_TO = os.environ.get("MAIL_TO", "hayeon@taihan.com")

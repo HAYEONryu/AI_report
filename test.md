@@ -164,52 +164,31 @@ gh secret set CALENDAR_PROXY_URL --repo HAYEONryu/AI_report   # Cloudflare Worke
 ```
 (각 명령을 실행하면 값을 입력하라는 프롬프트가 뜹니다.)
 
-### 3.2 수동 실행 (16시든 아무 때든)
+### 3.2 수동 실행 (수집·AI 레이어만 클라우드에서 테스트)
 ```bash
-# 오전 캐시부터 채우고 싶다면 먼저:
-gh workflow run morning-collect.yml --repo HAYEONryu/AI_report
-
-# 본 리포트 — skip_sleep 기본값 true라 즉시 실행됩니다
-gh workflow run daily-report.yml --repo HAYEONryu/AI_report
-
-# 진행상황 실시간 확인
+gh workflow run morning-collect.yml --repo HAYEONryu/AI_report   # 캘린더/뉴스/재고 캐시
+gh workflow run daily-report.yml --repo HAYEONryu/AI_report      # 항상 --now로 즉시 실행
 gh run watch --repo HAYEONryu/AI_report
 ```
-GitHub 웹 UI로도 가능합니다: **Actions 탭 → 워크플로우 선택 → "Run workflow"**.
-`daily-report.yml`은 수동 실행 시 "즉시 실행 (KST 15:00 대기 건너뛰기)" 체크박스가 기본 체크되어
-있어 몇 시에 눌러도 바로 실행됩니다. 체크를 해제하면 실제 cron과 동일하게 15:00까지 대기합니다.
+`daily-report.yml`은 **수동 테스트 전용**입니다 (cron 없음, `ubuntu-latest`). 발송 단계는
+`mail.ihoban.co.kr`이 사내망 전용이라 클라우드에서 항상 실패합니다 — 수집·AI 레이어만 확인하고
+싶을 때 씁니다. **실제 매일 발송은 GitHub Actions가 아니라 로컬 PC 작업 스케줄러가 담당합니다**
+(§3.3, README.md "자동 실행 방식" 참고).
 
-### 3.3 Self-hosted runner 설정 (`daily-report.yml` 전용, 필수)
+### 3.3 실제 발송 스케줄 — 로컬 PC 작업 스케줄러
 
-`mail.hoban.co.kr`이 사내망 전용이라 GitHub 소유의 클라우드 러너(`ubuntu-latest`)에서는
-DNS 조회조차 안 됩니다 (이 세션의 로컬 환경에서도 동일하게 실패 — 코드 문제가 아니라 네트워크
-경계 문제). 그래서 `daily-report.yml`은 `runs-on: [self-hosted, Windows]`로 바꿔뒀습니다.
-`morning-collect.yml`은 SMTP를 안 쓰므로 그대로 `ubuntu-latest`입니다.
+`mail.ihoban.co.kr`은 사내망 전용이라 GitHub 소유 클라우드 러너(호스티드든 self-hosted든, 이
+샌드박스든)에서는 도달 자체가 안 됩니다. 그래서 발송은 GitHub Actions가 아니라 **이 PC 자체의
+Windows 작업 스케줄러**가 담당합니다:
 
-**중요:** 러너는 반드시 `mail.hoban.co.kr`에 실제로 접속되는 사내망 PC(회사 와이파이/VPN 연결된
-PC)에 설치해야 합니다. 이 대화가 실행되는 샌드박스는 그 네트워크 밖이라 여기서 설치해도 의미가
-없습니다.
+```powershell
+schtasks /query /tn "AI_Report_Daily" /v /fo list   # 등록 상태 확인
+schtasks /run /tn "AI_Report_Daily"                 # 즉시 수동 실행
+```
 
-1. 사내망에 연결된 Windows PC에서 PowerShell을 관리자 권한으로 열기
-2. **GitHub 웹 UI**로 가서 정확한 최신 버전 명령을 받는 걸 권장: repo → **Settings → Actions →
-   Runners → New self-hosted runner → Windows** 선택 → 나오는 명령을 그대로 복사/붙여넣기
-   (버전 번호가 자동으로 최신으로 채워져서 안전합니다)
-3. 등록 시 토큰을 물어보면 아래 값 사용 가능 (발급 시각 기준 1시간 유효 — 만료됐으면 3번 URL에서
-   새 러너 추가 시 새 토큰이 자동으로 나옵니다):
-   ```
-   AKQ7JJHLHPCVRUSSHN4PRDLKQP6RE
-   ```
-4. `config.cmd` 실행 중 프롬프트는 전부 Enter(기본값)로 넘어가도 됩니다
-5. **포그라운드로 잠깐 테스트:** `./run.cmd` 실행 후 창을 열어둔 채로 워크플로우 수동 실행해서
-   확인
-6. **재부팅/로그아웃에도 계속 떠 있게 하려면 Windows 서비스로 설치:**
-   ```powershell
-   ./svc.cmd install
-   ./svc.cmd start
-   ```
-7. 스케줄된 cron(평일 KST 14:40)에도 매번 켜져 있어야 실제 자동 발송이 됩니다 — 이 PC가
-   그 시간에 항상 켜져 있고 네트워크에 연결되어 있는지 운영 관점에서 확인 필요합니다
-   (SPEC.md의 "사람 개입 0" 전제와 트레이드오프되는 지점 — 사용자가 명시적으로 선택함)
+작업 내용: 평일 15:50 KST → `scripts/run_daily.ps1` → `git pull` → `python main.py --now` →
+`data/` 커밋·푸시. 이 PC가 그 시각에 켜져 있고 사내망/VPN에 연결되어 있어야 발송됩니다 —
+SPEC.md의 "사람 개입 0" 전제와 트레이드오프되는 지점(사용자가 명시적으로 선택).
 
 ### 3.4 예상 실행 시간
 | 구간 | 시간 |

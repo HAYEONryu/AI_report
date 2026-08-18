@@ -139,7 +139,6 @@ def collect_news(now_utc=None):
 
 
 if __name__ == "__main__":
-    import json
     import sys
 
     sys.stdout.reconfigure(encoding="utf-8")  # Windows console defaults to cp949

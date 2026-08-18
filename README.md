@@ -40,12 +40,10 @@ ai/           OpenAI 호출 레이어 (추출/요약/코멘터리)
 templates/    이메일 HTML 템플릿
 main.py       전체 파이프라인 오케스트레이션
 deliver.py    SMTP 발송 + 웹훅 알림
-mailtest.py   SMTP 연결/인증만 따로 테스트
 config.py     URL·모델명·수신자 등 상수
 schema.py     리포트 JSON 스키마 + 검증
 ```
 
 ## 문제 해결
 
-- 특정 모듈만 테스트하고 싶으면 `test.md` 참고
-- 메일 인증 문제는 `python mailtest.py [아이디]`로 격리 테스트 (계정 잠금 방지를 위해 자동 재시도 없음)
+특정 모듈만 테스트하고 싶으면 `test.md` 참고.

@@ -104,15 +104,6 @@ def validate_report(report):
     return errors
 
 
-def empty_section(status, reason=None, **extra):
-    """Build a minimal failed/stale section body; caller fills required keys via extra."""
-    section = {"status": status}
-    if reason:
-        section["reason"] = reason
-    section.update(extra)
-    return section
-
-
 def _demo():
     """Self-check: a well-formed report passes, an inconsistent one fails."""
     good = {
@@ -131,7 +122,7 @@ def _demo():
     }
     assert validate_report(good) == [], validate_report(good)
 
-    bad = json_copy = {**good, "sections": {**good["sections"]}}
+    bad = {**good, "sections": {**good["sections"]}}
     bad["sections"]["inventory"] = {
         "status": STATUS_OK,
         "lme": [{"metal": "Copper", "prev": 100, "current": 110, "change": 999}],  # wrong on purpose
