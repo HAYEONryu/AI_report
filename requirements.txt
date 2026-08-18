@@ -1,0 +1,9 @@
+yfinance
+requests
+beautifulsoup4
+lxml
+pandas
+pdfplumber
+jinja2
+tenacity
+anthropic

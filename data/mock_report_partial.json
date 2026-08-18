@@ -1,0 +1,53 @@
+{
+  "report_date": "2026-08-18",
+  "generated_at": "2026-08-18T16:00:00+09:00",
+  "sections": {
+    "prices": {
+      "status": "ok",
+      "source": "yfinance",
+      "as_of": "2026-08-18T15:00:00+09:00",
+      "items": [
+        {
+          "key": "copper",
+          "label": "구리 선물 (COMEX HG)",
+          "price": 4.5215,
+          "unit": "USD/lb",
+          "prev_price": null,
+          "prev_basis": null,
+          "change": null,
+          "change_pct": null
+        }
+      ]
+    },
+    "calendar": {
+      "status": "stale",
+      "week_start": "2026-08-10",
+      "week_end": "2026-08-14",
+      "events": []
+    },
+    "news": {
+      "status": "ok",
+      "items": []
+    },
+    "inventory": {
+      "status": "failed",
+      "reason": "PDF 미게시",
+      "source_date": null,
+      "source_url": null,
+      "lme": [],
+      "comex": []
+    }
+  },
+  "commentary": {
+    "headline": "구리, 15시 스냅샷 확보 — 전일 비교 데이터 없음",
+    "body": [
+      "이력 데이터가 없어 전일 대비 계산이 불가능하다.",
+      "재고 데이터는 PDF 미게시로 수집에 실패했다."
+    ],
+    "implication": "데이터 정상화 후 재확인 필요"
+  },
+  "errors": [
+    { "section": "inventory", "reason": "PDF 미게시", "fallback": "캐시 없음" },
+    { "section": "calendar", "reason": "investing.com 응답 실패", "fallback": "2026-08-10 캐시 사용" }
+  ]
+}

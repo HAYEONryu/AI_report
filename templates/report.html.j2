@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>일일 원자재 리포트 {{ report.report_date }}</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f2f2f2;font-family:'Malgun Gothic',Arial,sans-serif;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f2f2f2;">
+<tr><td align="center">
+<table role="presentation" width="640" cellpadding="0" cellspacing="0" style="background-color:#ffffff;margin:16px 0;">
+
+  <!-- Header -->
+  <tr><td style="background-color:#1a1a2e;padding:20px 24px;">
+    <span style="color:#ffffff;font-size:20px;font-weight:bold;">일일 원자재 리포트</span><br>
+    <span style="color:#c9c9d9;font-size:13px;">{{ report.report_date }} 발행 · KST 15:00 기준</span>
+  </td></tr>
+
+  {% macro status_badge(status, as_of) -%}
+    {%- if status == 'stale' -%}
+      <span style="background-color:#999999;color:#fff;font-size:11px;padding:2px 6px;border-radius:3px;">{{ as_of }} 기준 (갱신 실패)</span>
+    {%- elif status == 'failed' -%}
+      <span style="background-color:#c0392b;color:#fff;font-size:11px;padding:2px 6px;border-radius:3px;">수집 실패</span>
+    {%- endif -%}
+  {%- endmacro %}
+
+  <!-- 1. Commentary -->
+  <tr><td style="padding:20px 24px;border-bottom:1px solid #eeeeee;">
+    <div style="font-size:18px;font-weight:bold;color:#1a1a2e;margin-bottom:10px;">{{ report.commentary.headline }}</div>
+    {% for sentence in report.commentary.body %}
+    <p style="font-size:14px;color:#333333;line-height:1.6;margin:0 0 8px 0;">{{ sentence }}</p>
+    {% endfor %}
+    <p style="font-size:13px;color:#555555;background-color:#f7f7fa;padding:8px 12px;margin-top:8px;">💡 {{ report.commentary.implication }}</p>
+  </td></tr>
+
+  <!-- 2. Prices -->
+  <tr><td style="padding:20px 24px;border-bottom:1px solid #eeeeee;">
+    <div style="font-size:15px;font-weight:bold;color:#1a1a2e;margin-bottom:10px;">시세 {{ status_badge(report.sections.prices.status, report.sections.prices.as_of) }}</div>
+    {% if report.sections.prices.status == 'failed' %}
+      <p style="color:#c0392b;font-size:13px;">수집 실패 — {{ report.sections.prices.reason }}</p>
+    {% else %}
+    <table role="presentation" width="100%" cellpadding="6" cellspacing="0" style="font-size:13px;{% if report.sections.prices.status == 'stale' %}filter:grayscale(1);opacity:0.7;{% endif %}">
+      <tr style="background-color:#f7f7fa;color:#555555;text-align:left;">
+        <td>품목</td><td align="right">가격</td><td align="right">전일 대비</td>
+      </tr>
+      {% for item in report.sections.prices['items'] %}
+      <tr style="border-bottom:1px solid #eeeeee;">
+        <td>{{ item.label }}</td>
+        <td align="right">{{ '%.4f'|format(item.price) }} {{ item.unit }}</td>
+        <td align="right">
+          {% if item.change is none %}
+            <span style="color:#999999;">비교 불가</span>
+          {% else %}
+            <span style="color:{{ '#c0392b' if item.change > 0 else ('#2980b9' if item.change < 0 else '#333333') }};">
+              {{ '%+.4f'|format(item.change) }} ({{ '%+.2f'|format(item.change_pct) }}%)
+            </span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+  </td></tr>
+
+  <!-- 3. Inventory -->
+  <tr><td style="padding:20px 24px;border-bottom:1px solid #eeeeee;">
+    <div style="font-size:15px;font-weight:bold;color:#1a1a2e;margin-bottom:10px;">재고 (LME / COMEX) {{ status_badge(report.sections.inventory.status, report.sections.inventory.source_date) }}</div>
+    {% if report.sections.inventory.status == 'failed' %}
+      <p style="color:#c0392b;font-size:13px;">수집 실패 — {{ report.sections.inventory.reason }}</p>
+    {% else %}
+    <p style="font-size:12px;color:#888888;margin:0 0 6px 0;">기준일자: {{ report.sections.inventory.source_date }}</p>
+    <table role="presentation" width="100%" cellpadding="6" cellspacing="0" style="font-size:13px;{% if report.sections.inventory.status == 'stale' %}filter:grayscale(1);opacity:0.7;{% endif %}">
+      <tr style="background-color:#f7f7fa;color:#555555;text-align:left;">
+        <td>거래소</td><td>금속</td><td align="right">전일재고</td><td align="right">현재재고</td><td align="right">변동</td>
+      </tr>
+      {% for row in report.sections.inventory.lme %}
+      <tr style="border-bottom:1px solid #eeeeee;">
+        <td>LME</td><td>{{ row.metal }}</td>
+        <td align="right">{{ '{:,}'.format(row.prev) }}</td>
+        <td align="right">{{ '{:,}'.format(row.current) }}</td>
+        <td align="right" style="color:{{ '#c0392b' if row.change > 0 else ('#2980b9' if row.change < 0 else '#333333') }};">{{ '%+d'|format(row.change) }} {{ row.unit }}</td>
+      </tr>
+      {% endfor %}
+      {% for row in report.sections.inventory.comex %}
+      <tr style="border-bottom:1px solid #eeeeee;">
+        <td>COMEX</td><td>{{ row.metal }}</td>
+        <td align="right">{{ '{:,}'.format(row.prev) }}</td>
+        <td align="right">{{ '{:,}'.format(row.current) }}</td>
+        <td align="right" style="color:{{ '#c0392b' if row.change > 0 else ('#2980b9' if row.change < 0 else '#333333') }};">{{ '%+d'|format(row.change) }} {{ row.unit }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+  </td></tr>
+
+  <!-- 4. Calendar -->
+  <tr><td style="padding:20px 24px;border-bottom:1px solid #eeeeee;">
+    <div style="font-size:15px;font-weight:bold;color:#1a1a2e;margin-bottom:10px;">이번 주 경제지표 (미국·중국) {{ status_badge(report.sections.calendar.status, report.sections.calendar.week_start) }}</div>
+    {% if report.sections.calendar.status == 'failed' %}
+      <p style="color:#c0392b;font-size:13px;">수집 실패 — {{ report.sections.calendar.reason }}</p>
+    {% else %}
+    <table role="presentation" width="100%" cellpadding="6" cellspacing="0" style="font-size:13px;{% if report.sections.calendar.status == 'stale' %}filter:grayscale(1);opacity:0.7;{% endif %}">
+      <tr style="background-color:#f7f7fa;color:#555555;text-align:left;">
+        <td>일시</td><td>국가</td><td>지표</td><td align="right">실제</td><td align="right">예상</td><td align="right">이전</td>
+      </tr>
+      {% for ev in report.sections.calendar.events %}
+      <tr style="border-bottom:1px solid #eeeeee;{% if not ev.is_released %}color:#999999;{% endif %}">
+        <td>{{ ev.date }} {{ ev.time_kst }}</td>
+        <td>{{ '🇺🇸' if ev.country == 'US' else '🇨🇳' }}</td>
+        <td>{{ ev.name }}{% if ev.importance == 3 %} ★{% endif %}</td>
+        <td align="right">{{ ev.actual if ev.actual is not none else '—' }}</td>
+        <td align="right">{{ ev.forecast }}</td>
+        <td align="right">{{ ev.previous }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% endif %}
+  </td></tr>
+
+  <!-- 5. News -->
+  <tr><td style="padding:20px 24px;">
+    <div style="font-size:15px;font-weight:bold;color:#1a1a2e;margin-bottom:10px;">구리 관련 뉴스 {{ status_badge(report.sections.news.status, '') }}</div>
+    {% if report.sections.news.status == 'failed' %}
+      <p style="color:#c0392b;font-size:13px;">수집 실패 — {{ report.sections.news.reason }}</p>
+    {% else %}
+      {% for n in report.sections.news['items'] %}
+      <div style="padding:8px 0;border-bottom:1px solid #eeeeee;{% if report.sections.news.status == 'stale' %}filter:grayscale(1);opacity:0.7;{% endif %}">
+        <a href="{{ n.link }}" style="font-size:14px;color:#16213e;font-weight:bold;text-decoration:none;">{{ n.title }}</a>
+        <span style="font-size:11px;color:#999999;"> · {{ n.press }} · {{ n.published_at[:10] }}</span>
+        {% if n.summary %}<p style="font-size:13px;color:#555555;margin:4px 0 0 0;">{{ n.summary }}</p>{% endif %}
+      </div>
+      {% endfor %}
+    {% endif %}
+  </td></tr>
+
+  <!-- Footer -->
+  <tr><td style="padding:16px 24px;background-color:#f7f7fa;">
+    <span style="font-size:11px;color:#999999;">본 리포트는 자동 생성되었습니다. 투자 판단의 근거로 사용할 수 없습니다. · 생성 시각 {{ report.generated_at }}</span>
+  </td></tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>

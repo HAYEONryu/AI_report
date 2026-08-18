@@ -1,0 +1,114 @@
+{
+  "report_date": "2026-08-18",
+  "generated_at": "2026-08-18T16:00:00+09:00",
+  "sections": {
+    "prices": {
+      "status": "ok",
+      "source": "yfinance",
+      "as_of": "2026-08-18T15:00:00+09:00",
+      "items": [
+        {
+          "key": "copper",
+          "label": "구리 선물 (COMEX HG)",
+          "price": 4.5215,
+          "unit": "USD/lb",
+          "prev_price": 4.578,
+          "prev_basis": "2026-08-17T15:00:00+09:00",
+          "change": -0.0565,
+          "change_pct": -1.234
+        },
+        {
+          "key": "wti",
+          "label": "WTI 원유",
+          "price": 78.42,
+          "unit": "USD/bbl",
+          "prev_price": 78.1,
+          "prev_basis": "2026-08-17T15:00:00+09:00",
+          "change": 0.32,
+          "change_pct": 0.41
+        },
+        {
+          "key": "usdkrw",
+          "label": "USD-KRW 환율",
+          "price": 1382.5,
+          "unit": "KRW",
+          "prev_price": 1379.8,
+          "prev_basis": "2026-08-17T15:00:00+09:00",
+          "change": 2.7,
+          "change_pct": 0.2
+        }
+      ]
+    },
+    "calendar": {
+      "status": "ok",
+      "week_start": "2026-08-17",
+      "week_end": "2026-08-21",
+      "events": [
+        {
+          "date": "2026-08-20",
+          "time_kst": "21:30",
+          "country": "US",
+          "importance": 3,
+          "name": "근원 소비자물가지수 (MoM)",
+          "actual": null,
+          "forecast": "0.3%",
+          "previous": "0.2%",
+          "is_released": false
+        },
+        {
+          "date": "2026-08-18",
+          "time_kst": "10:00",
+          "country": "CN",
+          "importance": 2,
+          "name": "산업생산 (YoY)",
+          "actual": "5.1%",
+          "forecast": "4.8%",
+          "previous": "4.6%",
+          "is_released": true
+        }
+      ]
+    },
+    "news": {
+      "status": "ok",
+      "items": [
+        {
+          "title": "LME 구리, 달러 강세에 사흘째 하락",
+          "link": "https://example.com/news/1",
+          "published_at": "2026-08-17T09:12:00+09:00",
+          "press": "연합뉴스",
+          "summary": "달러 인덱스 상승으로 LME 구리 가격이 사흘 연속 하락했다. 시장은 다음주 미국 CPI 발표를 주시하고 있다.",
+          "relevance": 5
+        },
+        {
+          "title": "전기동 수요 둔화 우려에 제련업계 긴장",
+          "link": "https://example.com/news/2",
+          "published_at": "2026-08-16T14:30:00+09:00",
+          "press": "머니투데이",
+          "summary": "중국 부동산 경기 둔화로 전기동 수요 전망이 낮아졌다. 국내 제련업계는 감산 여부를 검토 중이다.",
+          "relevance": 4
+        }
+      ]
+    },
+    "inventory": {
+      "status": "ok",
+      "source_date": "2026-08-17",
+      "source_url": "https://www.futures.co.kr/content/Getcontent.do?content=3000031",
+      "lme": [
+        { "metal": "Copper", "prev": 123450, "current": 124200, "change": 750, "unit": "톤" }
+      ],
+      "comex": [
+        { "metal": "Copper", "prev": 45120, "current": 44980, "change": -140, "unit": "숏톤" }
+      ]
+    }
+  },
+  "commentary": {
+    "headline": "구리, 달러 강세에 사흘째 약세",
+    "body": [
+      "COMEX 구리는 15시 기준 4.5215 USD/lb로 전일 대비 1.23% 하락했다.",
+      "달러 인덱스 상승과 중국 수요 둔화 우려가 겹치며 약세 흐름이 이어지고 있다.",
+      "LME 재고는 전일 대비 750톤 증가해 공급 압박은 제한적이다."
+    ],
+    "implication": "단기 원가 부담은 완화되나 중국 수요 지표 발표 전까지 관망 필요"
+  },
+  "errors": []
+}
