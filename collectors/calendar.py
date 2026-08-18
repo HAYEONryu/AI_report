@@ -3,9 +3,17 @@
 The general investing.com API returns 403 (Cloudflare). Plain `requests`/`curl`
 against the widget host *also* 403 here — Cloudflare bot management blocks on
 TLS fingerprint (JA3) alone, independent of headers. `curl_cffi` impersonates a
-real Chrome TLS handshake to get past that; it is still a single HTTP GET, not
-a headless browser — no JS execution, no DOM rendering, so this doesn't cross
-the "no Playwright" line, it just isn't plain `requests`.
+real Chrome TLS handshake to get past that, and it works reliably from a local
+machine — but from GitHub Actions' IP range, EVERY impersonated profile still
+got 403'd (confirmed live: chrome124/136/146, firefox147 all blocked). That
+points at IP reputation, not TLS fingerprint — GH Actions IPs are well-known
+scraping infrastructure. So in production this goes through a tiny Cloudflare
+Worker (cloudflare-worker/calendar-proxy.js) that fetches investing.com from
+Cloudflare's own edge and hands the HTML back; GH Actions just calls our own
+worker over plain `requests`, no impersonation needed for that leg. Locally
+(CALENDAR_PROXY_URL unset), it falls back to the direct curl_cffi path.
+Neither path executes JS or renders a DOM, so neither crosses the "no
+Playwright" line.
 
 Verified against a real fetch: the events table is `#ecEventsTable`, the date
 separator's `theDay` class sits on a child `<td>` (not the `<tr>` itself —
@@ -18,11 +26,13 @@ changes again later.
 """
 import json
 import logging
+import os
 import re
 from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+import requests
 from bs4 import BeautifulSoup
 from curl_cffi import requests as cf_requests
 from tenacity import retry, stop_after_attempt, wait_exponential
@@ -33,23 +43,33 @@ from schema import STATUS_FAILED, STATUS_OK, STATUS_STALE
 logger = logging.getLogger(__name__)
 CURRENCY_TO_COUNTRY = {"USD": "US", "CNY": "CN"}
 
-
 # Cloudflare's TLS-fingerprint blocklist shifts over time (chrome124 got
 # blocked from GitHub Actions' IP range even though it passed locally) — try
 # a few current profiles rather than betting the whole collector on one.
+# Only used as the local/dev fallback; production goes through the proxy below.
 _IMPERSONATE_PROFILES = ("chrome136", "chrome146", "firefox147")
 
 
 def _fetch_html():
+    proxy_url = os.environ.get("CALENDAR_PROXY_URL")
+    if proxy_url:
+        return _fetch_via_proxy(proxy_url)
+
     last_exc = None
     for profile in _IMPERSONATE_PROFILES:
         try:
-            resp = _fetch_with_profile(profile)
-            return resp
+            return _fetch_with_profile(profile)
         except Exception as exc:
             logger.warning("investing.com fetch failed with impersonate=%s: %s", profile, exc)
             last_exc = exc
     raise last_exc
+
+
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, max=30))
+def _fetch_via_proxy(proxy_url):
+    resp = requests.get(proxy_url, timeout=30)
+    resp.raise_for_status()
+    return resp.text
 
 
 @retry(stop=stop_after_attempt(2), wait=wait_exponential(multiplier=1, max=15))

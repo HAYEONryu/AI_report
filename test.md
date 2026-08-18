@@ -65,11 +65,23 @@ python -m collectors.calendar
      `grayEmptyBullishIcon`) `Full`/`Empty`로만 구분되는데, `gray` 유무로 필터링해서 정반대로 셌음
   실제 저장된 HTML(206KB)로 재검증해서 35개 이벤트가 정확한 중요도/날짜로 파싱되는 것 확인함.
 - 일반 `requests`/`curl`은 Cloudflare가 TLS 지문으로 403 차단합니다 → `curl_cffi`(브라우저 TLS 위장,
-  JS 실행 없음)로 우회. 다만 **특정 브라우저 지문 하나만 쓰면 위험합니다** — `chrome124`는 로컬에서는
-  통했지만 GitHub Actions IP에서는 403이 났습니다. 그래서 `chrome136`/`chrome146`/`firefox147`를
-  순서대로 시도하도록 만들어 뒀습니다. Cloudflare의 차단 목록은 계속 바뀌므로, 이 셋도 언젠가
-  전부 막히면 `_IMPERSONATE_PROFILES` 목록을 최신 프로필로 갱신해야 합니다.
+  JS 실행 없음)로 우회 시도. **하지만 브라우저 지문 4종(chrome124/136/146, firefox147) 전부 GitHub
+  Actions IP에서는 403이 났습니다** (로컬에서는 매번 200) — TLS 지문이 아니라 **GH Actions IP 대역
+  자체가 평판 차단**된 것으로 보입니다. 그래서 프로덕션에서는 `cloudflare-worker/calendar-proxy.js`를
+  통해 Cloudflare 자체 엣지에서 대신 가져오게 만들었습니다 (아래 "Cloudflare Worker 배포" 참고).
+  `CALENDAR_PROXY_URL`이 설정 안 되어 있으면 로컬 개발용으로 기존 `curl_cffi` 직접 호출로 폴백합니다.
 - **부작용:** `data/cache/calendar_{월요일날짜}.json`
+
+### Cloudflare Worker 배포 (`CALENDAR_PROXY_URL`, GH Actions에서만 필요)
+
+1. https://dash.cloudflare.com → **Workers & Pages** → **Create** → **Create Worker**
+2. 아무 이름이나 지정하고 생성 (예: `calendar-proxy`)
+3. 코드 편집기에서 기존 템플릿을 지우고 `cloudflare-worker/calendar-proxy.js` 내용을 그대로 붙여넣기
+4. **Deploy** 클릭
+5. 배포 후 나오는 URL (`https://calendar-proxy.<계정>.workers.dev` 형태) 복사
+6. `gh secret set CALENDAR_PROXY_URL --repo HAYEONryu/AI_report` 로 등록 (아래 §3.1 참고)
+
+무료 티어(하루 10만 요청)로 충분합니다. CLI(`wrangler`) 없이 대시보드만으로 끝납니다.
 
 ### `collectors/news.py` — 뉴스 (네이버 검색 API)
 ```bash
@@ -148,6 +160,7 @@ gh secret set SMTP_USER --repo HAYEONryu/AI_report
 gh secret set SMTP_APP_PASSWORD --repo HAYEONryu/AI_report
 gh secret set MAIL_TO --repo HAYEONryu/AI_report        # hannau416@gmail.com
 gh secret set ALERT_WEBHOOK_URL --repo HAYEONryu/AI_report
+gh secret set CALENDAR_PROXY_URL --repo HAYEONryu/AI_report   # Cloudflare Worker 배포 후 (위 참고)
 ```
 (각 명령을 실행하면 값을 입력하라는 프롬프트가 뜹니다.)
 

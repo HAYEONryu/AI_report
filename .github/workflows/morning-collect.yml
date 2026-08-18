@@ -25,6 +25,7 @@ jobs:
           NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
           NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CALENDAR_PROXY_URL: ${{ secrets.CALENDAR_PROXY_URL }}
         run: |
           python -m collectors.calendar
           python -m collectors.news

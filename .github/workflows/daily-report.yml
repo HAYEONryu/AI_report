@@ -34,6 +34,7 @@ jobs:
           SMTP_APP_PASSWORD: ${{ secrets.SMTP_APP_PASSWORD }}
           MAIL_TO: ${{ secrets.MAIL_TO }}
           ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}
+          CALENDAR_PROXY_URL: ${{ secrets.CALENDAR_PROXY_URL }}
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.skip_sleep }}" = "true" ]; then
             python main.py --now
