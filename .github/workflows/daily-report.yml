@@ -10,6 +10,9 @@ on:
         type: boolean
         default: true
 
+permissions:
+  contents: write
+
 jobs:
   report:
     runs-on: ubuntu-latest
