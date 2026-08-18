@@ -1,6 +1,6 @@
 {
   "report_date": "2026-08-18",
-  "generated_at": "2026-08-18T15:10:27.822681+09:00",
+  "generated_at": "2026-08-18T15:47:35.220167+09:00",
   "sections": {
     "prices": {
       "status": "ok",
@@ -10,22 +10,22 @@
         {
           "key": "copper",
           "label": "구리 선물 (COMEX HG)",
-          "price": 6.577,
+          "price": 6.5745,
           "unit": "USD/lb",
           "prev_price": 6.732999801635742,
           "prev_basis": "2026-08-17",
-          "change": -0.156,
-          "change_pct": -2.3169
+          "change": -0.1585,
+          "change_pct": -2.3541
         },
         {
           "key": "wti",
           "label": "WTI 원유",
-          "price": 85.129997,
+          "price": 85.160004,
           "unit": "USD/bbl",
           "prev_price": 81.70999908447266,
           "prev_basis": "2026-08-17",
-          "change": 3.419998,
-          "change_pct": 4.1855
+          "change": 3.450005,
+          "change_pct": 4.2223
         },
         {
           "key": "usdkrw",
@@ -435,13 +435,49 @@
       "status": "ok",
       "items": [
         {
+          "title": "LS, LS전선 성장에 저평가 해소 기대",
+          "link": "https://www.consumuch.com/news/articleView.html?idxno=78804",
+          "description": "이승영 NH투자증권 연구원은 \"LS전선은 고수익 제품인 버스덕트와 지중 케이블 매출 확대에 따라 이익 성장했다\"며 \"LS MnM은 구리 TC/RC와 금·은 가격 약세에도 황산 가격 강세, 전기동 프리미엄 효과 지속으로 견조한...",
+          "press": "consumuch.com",
+          "published_at": "2026-08-18T15:34:00+09:00",
+          "relevance": 5,
+          "summary": "LS전선이 고수익 제품 매출 확대 덕분에 이익 성장을 이루었으며, 구리 가격과 금·은 가격의 약세에도 불구하고 강세를 보였다."
+        },
+        {
+          "title": "LS 상반기 영업이익 '지난해 실적' 초과",
+          "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=52216",
+          "description": "산업의 근간인 전기동 생산부터 송전-변전-배전에 이르는 전력 인프라 전 과정에서 독보적인 통합... LS MnM은 전기동 강세와 귀금속 및 황산 제품 가격 상승에 힘입어 영업이익이 크게 개선됐다. LS아이앤디는 북미...",
+          "press": "koreareport.co.kr",
+          "published_at": "2026-08-18T13:38:00+09:00",
+          "relevance": 5,
+          "summary": "LS MnM이 전기동 강세에 힘입어 영업이익이 크게 개선되었으며, 전력 인프라 전 과정에서의 통합 역량이 주요 요인으로 분석되었다."
+        },
+        {
+          "title": "AI·전력망 수요 폭발…LS그룹, 상반기 만에 연간 영업익 넘어섰다",
+          "link": "http://www.economytalk.kr/news/articleView.html?idxno=423556",
+          "description": "LS는 전기동(銅) 생산부터 송전-변전-배전에 이르는 전력 인프라 등 통합 솔루션을 제공한다. LS전선... LS MnM은 전기동 프리미엄 강세와 귀금속 및 황산 제품 가격 상승에 힘입어 영업이익이 크게 개선됐으며...",
+          "press": "economytalk.kr",
+          "published_at": "2026-08-18T13:30:00+09:00",
+          "relevance": 5,
+          "summary": "LS그룹이 전기동 생산을 포함한 전력 인프라 솔루션을 제공하여 영업이익이 크게 개선되었다."
+        },
+        {
+          "title": "[재계 포커스] 제련 넘어 배터리로…고려아연 '트로이카 드라이브' 성과...",
+          "link": "https://www.polinews.co.kr/news/articleView.html?idxno=740396",
+          "description": "동박은 구리를 매우 얇게 가공한 소재로 리튬이온배터리의 음극집전체 역할을 한다. 배터리 내부에서 전자가... 단순히 가격 경쟁력만으로 소재를 선택하기보다 어떤 원료를 사용하고 어떤 공급망을 통해 생산했는지까지...",
+          "press": "polinews.co.kr",
+          "published_at": "2026-08-18T12:35:00+09:00",
+          "relevance": 5,
+          "summary": "동박이 구리로 가공되어 리튬이온배터리 음극집전체 역할을 하며, 공급망에 대한 중요성도 강조되었다."
+        },
+        {
           "title": "[호주 특징주] BHP, 구리값 급등에 순익 30%↑…'철광석→구리' 성장축 ...",
           "link": "https://www.newspim.com/news/view/20260818000704",
           "description": "권지언 특파원 = 세계 최대 광산업체 BHP그룹의 연간 이익이 구리 가격 급등에 힘입어 시장 예상을 웃돌았다. 특히 구리가 사상 처음으로 철광석을 제치고 최대 수익원으로 올라서면서 BHP의 성장 전략이...",
           "press": "newspim.com",
           "published_at": "2026-08-18T11:59:00+09:00",
           "relevance": 5,
-          "summary": "BHP의 연간 이익이 구리 가격 급등에 힘입어 시장 예상을 웃돌았으며, 구리가 최대 수익원으로 자리 잡았다."
+          "summary": "BHP그룹이 구리 가격 급등으로 예상치를 웃도는 순익을 기록하며, 구리가 주요 수익원으로 부각되었다."
         },
         {
           "title": "\"치솟는 구리·은·금값\"…최윤범號 고려아연, 자원 순환 효과 커진다",
@@ -450,7 +486,25 @@
           "press": "newsis.com",
           "published_at": "2026-08-18T11:09:00+09:00",
           "relevance": 5,
-          "summary": "구리 가격이 역대 최고치인 톤당 1만4850달러를 기록했으며, 전력 인프라의 핵심 소재로서 구리의 중요성이 강조되고 있다."
+          "summary": "구리 가격이 역대 최고치에 도달하여 전력 인프라 핵심 소재로써의 중요성이 강조되었다."
+        },
+        {
+          "title": "\"하이닉스가 끌고 이노베이션이 민다\" SK 목표가 37.5%↑…LS, 영업익 15...",
+          "link": "https://n.news.naver.com/mnews/article/014/0005562779?sid=101",
+          "description": "그러면서 최 연구원은 \"LS전선의 이익 성장과 LS MnM의 높아진 이익 체력이 실적을 통해 재차 확인됐다는 점, 높은 황산 가격 유지와 구리 가격 상승이 주요 계열사 실적에 수혜라는 점 등을 고려하면, 여전히 저평가...",
+          "press": "fnnews.com",
+          "published_at": "2026-08-18T11:02:00+09:00",
+          "relevance": 5,
+          "summary": "구리 가격 상승과 황산 가격 강세가 LS전선의 실적에 긍정적인 영향을 미쳤다고 평가되었다."
+        },
+        {
+          "title": "메리츠증권 \"LS 주요 자회사 고른 성장세, 2027년부터 본격적 성장 진입...",
+          "link": "https://www.businesspost.co.kr/BP?command=article_view&num=444927",
+          "description": "6% 증가했으며, 전체 영업이익 가운데 권선 부문 계열사 에식스솔루션즈가 80% 이상을 차지했다\"며 \"순수전기차용(BEV)용 권선과 변압기용 특수 권선 수요 확대, 우호적 환율·구리 가격이 성장을 견인했다\"고...",
+          "press": "businesspost.co.kr",
+          "published_at": "2026-08-18T10:42:00+09:00",
+          "relevance": 5,
+          "summary": "구리 가격 상승이 메리츠증권의 LS 실적에 긍정적 영향을 주었으며, 권선 부문 계열사의 수요도 증가했다고 밝혔다."
         },
         {
           "title": "월드 뉴스 브리프 (기준일시: 2026년 08월 18일 화요일 10:00)",
@@ -459,16 +513,7 @@
           "press": "ifs.or.kr",
           "published_at": "2026-08-18T10:26:00+09:00",
           "relevance": 5,
-          "summary": "구리 수익이 철광석을 처음으로 추월하여 BHP의 성장 전략에 큰 영향을 미쳤다."
-        },
-        {
-          "title": "美 최대 구리 생산업체, AI 광풍 속 새로운 수혜주 등극...\"채굴주로 자...",
-          "link": "http://coinreaders.com/253215",
-          "description": "구리 가격이 오르면 채굴 비용이 상대적으로 고정된 상황에서 매출 증가 폭이 이익에 더 크게 반영될 수 있다는 분석이다. 월가의 전망도 강하다. 팁랭크스(TipRanks) 집계에서는 매수 10건, 보유 3건, 매도 0건으로...",
-          "press": "coinreaders.com",
-          "published_at": "2026-08-18T10:16:00+09:00",
-          "relevance": 5,
-          "summary": "구리 가격 상승이 채굴 비용 증가에 긍정적인 영향을 미쳐 새로운 투자 기회가 창출될 것으로 보인다."
+          "summary": "BHP가 구리 가격 상승에 힘입어 시장 예상을 웃도는 실적을 발표하고, 구리가 주요 수익원으로 부각되었다."
         },
         {
           "title": "[원자재 시황] 유가·금리 상승에 시장 혼조",
@@ -477,59 +522,14 @@
           "press": "ebn.co.kr",
           "published_at": "2026-08-18T09:46:00+09:00",
           "relevance": 5,
-          "summary": "구리 가격이 급등하면서 LME 재고가 급감했음을 나타내며, 공급 부족 우려가 부각되고 있다."
-        },
-        {
-          "title": "[EBN 데이터센터] 금·은 약보합…WTI 84달러대로 상승",
-          "link": "https://www.ebn.co.kr/news/articleView.html?idxno=1720649",
-          "description": "다만 배경 측면에서는 미국의 금리 경계 완화와 달러 흐름, 중동 정세 불안이 금 가격 하단을... 구리 선물은 파운드당 6.6095달러로 0.10% 내렸지만 구리 현물은 톤당 1만4593.98달러로 0.12% 올랐다. 니켈은 톤당...",
-          "press": "ebn.co.kr",
-          "published_at": "2026-08-18T09:20:00+09:00",
-          "relevance": 5,
-          "summary": "구리 선물이 약간 하락했으나 구리 현물은 상승세를 보였다."
-        },
-        {
-          "title": "LS 상반기 영업이익 '지난해 실적' 초과",
-          "link": "https://www.koreareport.co.kr/news/articleView.html?idxno=52216",
-          "description": "산업의 근간인 전기동 생산부터 송전-변전-배전에 이르는 전력 인프라 전 과정에서 독보적인 통합... LS MnM은 전기동 강세와 귀금속 및 황산 제품 가격 상승에 힘입어 영업이익이 크게 개선됐다. LS아이앤디는 북미...",
-          "press": "koreareport.co.kr",
-          "published_at": "2026-08-18T13:38:00+09:00",
-          "relevance": 4,
-          "summary": "LS는 전기동 생산과 전력 인프라 전 과정에서 독보적인 경쟁력을 보이며, 전기동 강세와 귀금속 제품 가격 상승으로 영업이익이 크게 개선되었다."
-        },
-        {
-          "title": "AI·전력망 수요 폭발…LS그룹, 상반기 만에 연간 영업익 넘어섰다",
-          "link": "http://www.economytalk.kr/news/articleView.html?idxno=423556",
-          "description": "LS는 전기동(銅) 생산부터 송전-변전-배전에 이르는 전력 인프라 등 통합 솔루션을 제공한다. LS전선... LS MnM은 전기동 프리미엄 강세와 귀금속 및 황산 제품 가격 상승에 힘입어 영업이익이 크게 개선됐으며...",
-          "press": "economytalk.kr",
-          "published_at": "2026-08-18T13:30:00+09:00",
-          "relevance": 4,
-          "summary": "LS는 전기동 생산부터 전력 인프라 솔루션까지 제공하며, 전기동 프리미엄 강세로 영업이익이 크게 개선되었다."
-        },
-        {
-          "title": "[재계 포커스] 제련 넘어 배터리로…고려아연 '트로이카 드라이브' 성과...",
-          "link": "https://www.polinews.co.kr/news/articleView.html?idxno=740396",
-          "description": "동박은 구리를 매우 얇게 가공한 소재로 리튬이온배터리의 음극집전체 역할을 한다. 배터리 내부에서 전자가... 단순히 가격 경쟁력만으로 소재를 선택하기보다 어떤 원료를 사용하고 어떤 공급망을 통해 생산했는지까지...",
-          "press": "polinews.co.kr",
-          "published_at": "2026-08-18T12:35:00+09:00",
-          "relevance": 4,
-          "summary": "동박은 리튬이온배터리의 음극집전체 역할을 하며, 구리 사용의 중요성이 강조되고 있다."
-        },
-        {
-          "title": "[특징주] 티씨머티리얼즈, 상반기 영업익 102억…구리값·전방산업은 변...",
-          "link": "https://www.newstnt.com/news/articleView.html?idxno=714196",
-          "description": "◆ 최대주주 바이오스마트…구리 가격·전방산업 변수 지배구조에서는 바이오스마트가 최대주주로 확인된다. 2026년 반기 말 기준 바이오스마트의 보유 주식은 1668만1137주로 지분율은 47.61%다. 발행주식총수는...",
-          "press": "newstnt.com",
-          "published_at": "2026-08-18T12:16:00+09:00",
-          "relevance": 4,
-          "summary": "구리 가격과 전방 산업 변수가 티씨머티리얼즈의 영업 활동에 영향을 미치고 있다."
+          "summary": "구리 가격이 6개월래 최고치에 다다른 이유는 LME 재고 급감에 따른 공급 부족 우려 때문으로 분석되었다."
         }
       ]
     },
     "inventory": {
       "status": "ok",
       "source_date": "2026-08-17",
-      "source_url": "https://www.futures.co.kr/common/BbsFileDown.do;jsessionid=42F9195A7EA1CF07ED4941B2539186E2.KOR11?atchFileId=FILE_000000000033761&FileNm=NHF+Daily+Metal+Bulletin+20260817.pdf",
+      "source_url": "https://www.futures.co.kr/common/BbsFileDown.do;jsessionid=B06EE398E979E0F2A85E9EFB5EEDD073.KOR11?atchFileId=FILE_000000000033761&FileNm=NHF+Daily+Metal+Bulletin+20260817.pdf",
       "lme": [
         {
           "metal": "Copper",
@@ -551,13 +551,13 @@
     }
   },
   "commentary": {
-    "headline": "구리 가격 하락, 원자재 시장의 변동성 증가",
+    "headline": "구리가격 하락, WTI 원유 가격 상승",
     "body": [
-      "구리 선물 가격이 6.577 USD/lb으로 전날보다 2.32% 하락하며 원자재 시장의 변동성이 커졌다.",
-      "반면 WTI 원유는 85.13 USD/bbl로 4.19% 상승했으며, 이는 원가 구조에 혼재된 영향을 미칠 가능성을 내포하고 있다.",
-      "USD-KRW 환율은 1410.48로 다소 하락했지만 큰 차이는 없다."
+      "구리 선물 가격이 6.5745 USD/lb로 전날 대비 2.35% 하락하였습니다.",
+      "WTI 원유는 85.16 USD/bbl로 전날 대비 4.22% 상승하여 시장에서 큰 변동성을 나타냈습니다.",
+      "USD-KRW 환율은 1410.48로 약간 하락했습니다."
     ],
-    "implication": "구리 가격 하락이 전선/케이블 제조 비용에 긍정적으로 작용할 수 있지만, 원유 가격 상승이 운반 및 제조 비용을 압박할 수 있다."
+    "implication": "구리가격 하락은 원자재 비용 절감을 가져올 수 있지만 원유 가격 상승은 운송 및 에너지 비용 증가로 이어질 수 있습니다."
   },
   "errors": []
 }

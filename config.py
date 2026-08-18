@@ -3,6 +3,13 @@ No secrets here — those come from environment variables (see .env.example).
 """
 import os
 
+from dotenv import load_dotenv
+
+# Windows Task Scheduler doesn't inherit shell env vars, so the local daily
+# run depends on this to pick up secrets from .env. Harmless no-op in CI,
+# where the real env vars are already set by GitHub Actions.
+load_dotenv()
+
 # --- Timezone ---
 KST = "Asia/Seoul"
 
@@ -52,9 +59,14 @@ AI_MODEL_SUMMARIZE = "gpt-4o-mini"
 AI_MODEL_COMMENTARY = "gpt-4o"
 
 # --- Delivery ---
-SMTP_HOST = "mail.hoban.co.kr"
+# Correct host is mail.ihoban.co.kr (typo'd as mail.hoban.co.kr originally;
+# mail.taihan.com was a dead-end guess based on the AD domain, wrong on the
+# server side too). Port 587 is open here (25 also open, 465/995 closed) —
+# matches the original STARTTLS port the user intended. Login/mailbox is
+# @taihan.com, not @taihan.co.kr (mailtest.py confirmed: 235 auth success).
+SMTP_HOST = "mail.ihoban.co.kr"
 SMTP_PORT = 587
-MAIL_TO = os.environ.get("MAIL_TO", "hannau416@gmail.com")
+MAIL_TO = os.environ.get("MAIL_TO", "hayeon@taihan.com")
 
 # --- Anomaly flagging (rule-based, not AI) ---
 ANOMALY_CHANGE_PCT_THRESHOLD = 20.0

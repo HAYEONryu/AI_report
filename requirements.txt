@@ -8,3 +8,4 @@ pdfplumber
 jinja2
 tenacity
 openai
+python-dotenv
