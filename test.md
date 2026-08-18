@@ -155,7 +155,7 @@ Repo: `HAYEONryu/AI_report` (private).
 ```bash
 gh secret set NAVER_CLIENT_ID --repo HAYEONryu/AI_report
 gh secret set NAVER_CLIENT_SECRET --repo HAYEONryu/AI_report
-gh secret set ANTHROPIC_API_KEY --repo HAYEONryu/AI_report
+gh secret set OPENAI_API_KEY --repo HAYEONryu/AI_report
 gh secret set SMTP_USER --repo HAYEONryu/AI_report
 gh secret set SMTP_APP_PASSWORD --repo HAYEONryu/AI_report
 gh secret set MAIL_TO --repo HAYEONryu/AI_report        # hannau416@gmail.com
@@ -179,7 +179,39 @@ GitHub 웹 UI로도 가능합니다: **Actions 탭 → 워크플로우 선택 �
 `daily-report.yml`은 수동 실행 시 "즉시 실행 (KST 15:00 대기 건너뛰기)" 체크박스가 기본 체크되어
 있어 몇 시에 눌러도 바로 실행됩니다. 체크를 해제하면 실제 cron과 동일하게 15:00까지 대기합니다.
 
-### 3.3 예상 실행 시간
+### 3.3 Self-hosted runner 설정 (`daily-report.yml` 전용, 필수)
+
+`mail.hoban.co.kr`이 사내망 전용이라 GitHub 소유의 클라우드 러너(`ubuntu-latest`)에서는
+DNS 조회조차 안 됩니다 (이 세션의 로컬 환경에서도 동일하게 실패 — 코드 문제가 아니라 네트워크
+경계 문제). 그래서 `daily-report.yml`은 `runs-on: [self-hosted, Windows]`로 바꿔뒀습니다.
+`morning-collect.yml`은 SMTP를 안 쓰므로 그대로 `ubuntu-latest`입니다.
+
+**중요:** 러너는 반드시 `mail.hoban.co.kr`에 실제로 접속되는 사내망 PC(회사 와이파이/VPN 연결된
+PC)에 설치해야 합니다. 이 대화가 실행되는 샌드박스는 그 네트워크 밖이라 여기서 설치해도 의미가
+없습니다.
+
+1. 사내망에 연결된 Windows PC에서 PowerShell을 관리자 권한으로 열기
+2. **GitHub 웹 UI**로 가서 정확한 최신 버전 명령을 받는 걸 권장: repo → **Settings → Actions →
+   Runners → New self-hosted runner → Windows** 선택 → 나오는 명령을 그대로 복사/붙여넣기
+   (버전 번호가 자동으로 최신으로 채워져서 안전합니다)
+3. 등록 시 토큰을 물어보면 아래 값 사용 가능 (발급 시각 기준 1시간 유효 — 만료됐으면 3번 URL에서
+   새 러너 추가 시 새 토큰이 자동으로 나옵니다):
+   ```
+   AKQ7JJHLHPCVRUSSHN4PRDLKQP6RE
+   ```
+4. `config.cmd` 실행 중 프롬프트는 전부 Enter(기본값)로 넘어가도 됩니다
+5. **포그라운드로 잠깐 테스트:** `./run.cmd` 실행 후 창을 열어둔 채로 워크플로우 수동 실행해서
+   확인
+6. **재부팅/로그아웃에도 계속 떠 있게 하려면 Windows 서비스로 설치:**
+   ```powershell
+   ./svc.cmd install
+   ./svc.cmd start
+   ```
+7. 스케줄된 cron(평일 KST 14:40)에도 매번 켜져 있어야 실제 자동 발송이 됩니다 — 이 PC가
+   그 시간에 항상 켜져 있고 네트워크에 연결되어 있는지 운영 관점에서 확인 필요합니다
+   (SPEC.md의 "사람 개입 0" 전제와 트레이드오프되는 지점 — 사용자가 명시적으로 선택함)
+
+### 3.4 예상 실행 시간
 | 구간 | 시간 |
 |---|---|
 | Job 기동 + `pip install` | 30~60초 |

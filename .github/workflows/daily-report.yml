@@ -15,7 +15,11 @@ permissions:
 
 jobs:
   report:
-    runs-on: ubuntu-latest
+    # Self-hosted, not ubuntu-latest: SMTP_HOST (mail.hoban.co.kr) only
+    # resolves from inside the company network. Requires a runner registered
+    # on a machine that's actually on that network and online at run time —
+    # see test.md "Self-hosted runner 설정".
+    runs-on: [self-hosted, Windows]
     steps:
       - uses: actions/checkout@v4
 
@@ -35,6 +39,7 @@ jobs:
           MAIL_TO: ${{ secrets.MAIL_TO }}
           ALERT_WEBHOOK_URL: ${{ secrets.ALERT_WEBHOOK_URL }}
           CALENDAR_PROXY_URL: ${{ secrets.CALENDAR_PROXY_URL }}
+        shell: bash
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.skip_sleep }}" = "true" ]; then
             python main.py --now
@@ -44,6 +49,7 @@ jobs:
 
       - name: Commit report + history
         if: always()
+        shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
