@@ -58,15 +58,17 @@ python -m collectors.prices
 ```bash
 python -m collectors.calendar
 ```
-- **알려진 이슈:** 이 샌드박스에서는 실제 응답을 200으로 받았지만 파싱 결과가 0건이었습니다
-  (`파싱된 이벤트 0건 — investing.com 마크업 구조 변경 가능성` → `status: failed`로 정상 폴백).
-  investing.com의 실제 위젯 HTML 구조(class명 `theDay`, `eventRowId_`, `sentiment` 아이콘 등)를
-  이 세션에서 끝까지 라이브 검증하지 못했습니다 (네트워크 타임아웃 반복).
-  **실제 운영 전에 이 명령을 안정적인 네트워크에서 한 번 실행해서 이벤트가 몇 건이든 나오는지
-  확인하세요.** 0건이 계속 나오면 `collectors/calendar.py`의 `_parse_events()` / `_importance_from_icons()`
-  선택자를 실제 HTML에 맞게 고쳐야 합니다.
-- 일반 `requests`/`curl`은 Cloudflare가 TLS 지문으로 403 차단하는 것을 확인했습니다 → `curl_cffi`(Chrome
-  TLS 위장, JS 실행 없음)로 우회. GitHub Actions IP에서도 통할지는 `workflow_dispatch`로 별도 확인 필요.
+- **실제 HTML로 검증 완료.** 처음 작성한 버전은 두 가지가 틀렸었습니다:
+  1. 날짜 구분자 `theDay` 클래스가 `<tr>`가 아니라 그 안의 `<td>`에 붙어있어서 날짜를 절대
+     못 읽고 모든 이벤트를 건너뛰었음 (파싱 0건의 진짜 원인)
+  2. 중요도 아이콘이 채워진 것도 빈 것도 둘 다 클래스에 `gray`가 붙어있고(`grayFullBullishIcon` /
+     `grayEmptyBullishIcon`) `Full`/`Empty`로만 구분되는데, `gray` 유무로 필터링해서 정반대로 셌음
+  실제 저장된 HTML(206KB)로 재검증해서 35개 이벤트가 정확한 중요도/날짜로 파싱되는 것 확인함.
+- 일반 `requests`/`curl`은 Cloudflare가 TLS 지문으로 403 차단합니다 → `curl_cffi`(브라우저 TLS 위장,
+  JS 실행 없음)로 우회. 다만 **특정 브라우저 지문 하나만 쓰면 위험합니다** — `chrome124`는 로컬에서는
+  통했지만 GitHub Actions IP에서는 403이 났습니다. 그래서 `chrome136`/`chrome146`/`firefox147`를
+  순서대로 시도하도록 만들어 뒀습니다. Cloudflare의 차단 목록은 계속 바뀌므로, 이 셋도 언젠가
+  전부 막히면 `_IMPERSONATE_PROFILES` 목록을 최신 프로필로 갱신해야 합니다.
 - **부작용:** `data/cache/calendar_{월요일날짜}.json`
 
 ### `collectors/news.py` — 뉴스 (네이버 검색 API)
@@ -178,13 +180,24 @@ GitHub 웹 UI로도 가능합니다: **Actions 탭 → 워크플로우 선택 �
 
 ---
 
-## 4. 알려진 한계 (다음에 반드시 확인할 것)
+## 4. 알려진 한계
 
-1. **`collectors/calendar.py`의 실제 HTML 셀렉터 미검증.** 이 세션은 네트워크 제약으로 investing.com
-   위젯의 실제 마크업을 끝까지 못 봤습니다. 파싱 0건이면 실패로 안전하게 처리되긴 하지만, 매일
-   경제지표 섹션이 `failed`로 뜬다면 이 파일의 선택자를 실제 HTML 보고 고쳐야 합니다.
-2. **`curl_cffi`가 GitHub Actions IP에서도 통하는지 미검증.** 로컬에서는 통했지만 Actions 러너
-   IP 대역에 대한 Cloudflare 반응은 실제로 `workflow_dispatch`를 한 번 돌려봐야 압니다.
-3. **`_press_from_link()`(news.py)는 언론사명이 아니라 도메인을 씁니다** (예: "연합뉴스" 대신
+1. **`_press_from_link()`(news.py)는 언론사명이 아니라 도메인을 씁니다** (예: "연합뉴스" 대신
    "yna.co.kr"). 네이버 뉴스 API가 언론사명을 안 주기 때문입니다 — 리포트에 그대로 노출되니
    참고하세요.
+2. **GitHub Secrets가 등록 안 되어 있으면 env var가 "없음"이 아니라 빈 문자열("")이 됩니다.**
+   `${{ secrets.SMTP_USER }}` 같은 식으로 워크플로우에 박아두면, 시크릿을 등록 안 해도
+   `os.environ["SMTP_USER"]`가 `KeyError`를 내는 대신 빈 문자열을 돌려줍니다 — 실제로
+   `daily-report.yml`을 SMTP 시크릿 없이 돌렸을 때 Gmail이 "빈 아이디/비번"으로 인증 시도하는 걸
+   확인했습니다 (535 에러). 코드 버그는 아니고 GitHub Actions의 기본 동작이니 참고만 하세요.
+
+## 5. 실제로 검증된 것 (2026-08-18 세션 기준)
+
+- `collectors/prices.py`: 로컬에서 yfinance 1분봉 3종 전부 `status: ok`로 실측
+- `collectors/inventory.py`: NH선물 게시물 파싱 → PDF 다운로드 → "LME Stock"/"COMEX" 페이지
+  찾기까지 로컬에서 전부 성공 (AI 키 없어 구조화만 실패)
+- `collectors/news.py`: GitHub Actions에서 네이버 검색 실제 성공, AI 요약만 키 없어 실패 →
+  제목/링크만으로 우아하게 폴백
+- `collectors/calendar.py`: 로컬 재검증으로 이벤트 35건 정상 파싱 확인 (§1 참고)
+- `python main.py --now`: 시크릿 하나도 없이 로컬/Actions 양쪽에서 전체 파이프라인이 안 죽고
+  끝까지 실행되어 `data/reports/{날짜}.json`을 남기는 것 확인 (SPEC.md §8 rule 1 실증)

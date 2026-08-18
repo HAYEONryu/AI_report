@@ -7,12 +7,14 @@ real Chrome TLS handshake to get past that; it is still a single HTTP GET, not
 a headless browser — no JS execution, no DOM rendering, so this doesn't cross
 the "no Playwright" line, it just isn't plain `requests`.
 
-Row/icon class names below match investing.com's long-standing, widely-scraped
-widget markup, but weren't re-verified against a live fetch in this sandbox
-(network timeouts). If _parse_events() ever returns 0 events from a 200
-response, that's treated as a parse failure and falls back to cache — verify
-with `python -m collectors.calendar` before relying on this in production
-(see test.md).
+Verified against a real fetch: the events table is `#ecEventsTable`, the date
+separator's `theDay` class sits on a child `<td>` (not the `<tr>` itself —
+easy to get wrong, and the first version of this file did), and importance
+icons are `grayFullBullishIcon` (filled) vs `grayEmptyBullishIcon` (empty) —
+both carry "gray", so "Full" vs "Empty" is the only reliable signal, not the
+color. If _parse_events() ever returns 0 events from a 200 response, that's
+still treated as a parse failure and falls back to cache, in case the markup
+changes again later.
 """
 import json
 import logging
@@ -32,9 +34,27 @@ logger = logging.getLogger(__name__)
 CURRENCY_TO_COUNTRY = {"USD": "US", "CNY": "CN"}
 
 
-@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, max=30))
+# Cloudflare's TLS-fingerprint blocklist shifts over time (chrome124 got
+# blocked from GitHub Actions' IP range even though it passed locally) — try
+# a few current profiles rather than betting the whole collector on one.
+_IMPERSONATE_PROFILES = ("chrome136", "chrome146", "firefox147")
+
+
 def _fetch_html():
-    resp = cf_requests.get(INVESTING_CALENDAR_URL, impersonate="chrome124", timeout=30)
+    last_exc = None
+    for profile in _IMPERSONATE_PROFILES:
+        try:
+            resp = _fetch_with_profile(profile)
+            return resp
+        except Exception as exc:
+            logger.warning("investing.com fetch failed with impersonate=%s: %s", profile, exc)
+            last_exc = exc
+    raise last_exc
+
+
+@retry(stop=stop_after_attempt(2), wait=wait_exponential(multiplier=1, max=15))
+def _fetch_with_profile(profile):
+    resp = cf_requests.get(INVESTING_CALENDAR_URL, impersonate=profile, timeout=30)
     resp.raise_for_status()
     return resp.text
 
@@ -46,7 +66,7 @@ def _importance_from_icons(td):
     icons = td.find_all("i")
     if not icons:
         return None
-    filled = [i for i in icons if "grayfull" not in " ".join(i.get("class", [])).lower()]
+    filled = [i for i in icons if "full" in " ".join(i.get("class", [])).lower()]
     return len(filled) or None
 
 
@@ -64,15 +84,15 @@ def _cell_text(row, *, td_id_prefix=None, css_class=None):
 
 def _parse_events(html):
     soup = BeautifulSoup(html, "lxml")
-    table = soup.find("table", id="economicCalendarData") or soup
+    table = soup.find("table", id="ecEventsTable") or soup
     current_date = None
     events = []
 
     for row in table.find_all("tr"):
-        classes = row.get("class") or []
-
-        if "theDay" in classes:
-            m = re.search(r"([A-Za-z]+ \d{1,2}, \d{4})", row.get_text(strip=True))
+        # The "theDay" class sits on a <td> inside the row, not on the <tr> itself.
+        day_cell = row.find("td", class_="theDay")
+        if day_cell is not None:
+            m = re.search(r"([A-Za-z]+ \d{1,2}, \d{4})", day_cell.get_text(strip=True))
             if m:
                 current_date = datetime.strptime(m.group(1), "%B %d, %Y").date()
             continue
