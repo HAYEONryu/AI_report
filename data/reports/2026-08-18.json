@@ -1,0 +1,87 @@
+{
+  "report_date": "2026-08-18",
+  "generated_at": "2026-08-18T11:20:08.673991+09:00",
+  "sections": {
+    "prices": {
+      "status": "ok",
+      "source": "yfinance",
+      "as_of": "2026-08-18T15:00:00+09:00",
+      "items": [
+        {
+          "key": "copper",
+          "label": "구리 선물 (COMEX HG)",
+          "price": 6.577,
+          "unit": "USD/lb",
+          "prev_price": 6.732999801635742,
+          "prev_basis": "2026-08-17",
+          "change": -0.156,
+          "change_pct": -2.3169
+        },
+        {
+          "key": "wti",
+          "label": "WTI 원유",
+          "price": 85.029999,
+          "unit": "USD/bbl",
+          "prev_price": 81.70999908447266,
+          "prev_basis": "2026-08-17",
+          "change": 3.32,
+          "change_pct": 4.0632
+        },
+        {
+          "key": "usdkrw",
+          "label": "USD-KRW 환율",
+          "price": 1410.97998,
+          "unit": "KRW",
+          "prev_price": 1413.6500244140625,
+          "prev_basis": "2026-08-17",
+          "change": -2.670044,
+          "change_pct": -0.1889
+        }
+      ]
+    },
+    "calendar": {
+      "status": "failed",
+      "week_start": "2026-08-17",
+      "week_end": "2026-08-23",
+      "events": []
+    },
+    "news": {
+      "status": "failed",
+      "reason": "NAVER_CLIENT_ID/SECRET 미설정",
+      "items": []
+    },
+    "inventory": {
+      "status": "failed",
+      "reason": "AI 추출/검증 실패",
+      "lme": [],
+      "comex": []
+    }
+  },
+  "commentary": {
+    "headline": "코멘터리 생성 실패",
+    "body": [],
+    "implication": ""
+  },
+  "errors": [
+    {
+      "section": "calendar",
+      "reason": "파싱된 이벤트 0건 — investing.com 마크업 구조 변경 가능성",
+      "fallback": "캐시 없음"
+    },
+    {
+      "section": "news",
+      "reason": "NAVER_CLIENT_ID/SECRET 미설정",
+      "fallback": "없음"
+    },
+    {
+      "section": "inventory",
+      "reason": "AI 추출/검증 실패",
+      "fallback": "캐시 없음"
+    },
+    {
+      "section": "commentary",
+      "reason": "AI 코멘터리 생성 실패",
+      "fallback": "기본 문구 사용"
+    }
+  ]
+}

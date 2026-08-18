@@ -1,0 +1,184 @@
+"""US/China weekly economic calendar via investing.com's official iframe widget (SPEC.md §4.2).
+
+The general investing.com API returns 403 (Cloudflare). Plain `requests`/`curl`
+against the widget host *also* 403 here — Cloudflare bot management blocks on
+TLS fingerprint (JA3) alone, independent of headers. `curl_cffi` impersonates a
+real Chrome TLS handshake to get past that; it is still a single HTTP GET, not
+a headless browser — no JS execution, no DOM rendering, so this doesn't cross
+the "no Playwright" line, it just isn't plain `requests`.
+
+Row/icon class names below match investing.com's long-standing, widely-scraped
+widget markup, but weren't re-verified against a live fetch in this sandbox
+(network timeouts). If _parse_events() ever returns 0 events from a 200
+response, that's treated as a parse failure and falls back to cache — verify
+with `python -m collectors.calendar` before relying on this in production
+(see test.md).
+"""
+import json
+import logging
+import re
+from datetime import datetime, timedelta
+from pathlib import Path
+from zoneinfo import ZoneInfo
+
+from bs4 import BeautifulSoup
+from curl_cffi import requests as cf_requests
+from tenacity import retry, stop_after_attempt, wait_exponential
+
+from config import CALENDAR_CACHE_TEMPLATE, INVESTING_CALENDAR_URL, INVESTING_MIN_IMPORTANCE, KST
+from schema import STATUS_FAILED, STATUS_OK, STATUS_STALE
+
+logger = logging.getLogger(__name__)
+CURRENCY_TO_COUNTRY = {"USD": "US", "CNY": "CN"}
+
+
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, max=30))
+def _fetch_html():
+    resp = cf_requests.get(INVESTING_CALENDAR_URL, impersonate="chrome124", timeout=30)
+    resp.raise_for_status()
+    return resp.text
+
+
+def _importance_from_icons(td):
+    """Importance = count of *filled* bull icons among the 3 rendered per row."""
+    if td is None:
+        return None
+    icons = td.find_all("i")
+    if not icons:
+        return None
+    filled = [i for i in icons if "grayfull" not in " ".join(i.get("class", [])).lower()]
+    return len(filled) or None
+
+
+def _cell_text(row, *, td_id_prefix=None, css_class=None):
+    td = None
+    if td_id_prefix:
+        td = row.find("td", id=lambda v: v and v.startswith(td_id_prefix))
+    if td is None and css_class:
+        td = row.find("td", class_=css_class)
+    if td is None:
+        return None
+    text = td.get_text(strip=True)
+    return text if text and text not in ("\xa0",) else None
+
+
+def _parse_events(html):
+    soup = BeautifulSoup(html, "lxml")
+    table = soup.find("table", id="economicCalendarData") or soup
+    current_date = None
+    events = []
+
+    for row in table.find_all("tr"):
+        classes = row.get("class") or []
+
+        if "theDay" in classes:
+            m = re.search(r"([A-Za-z]+ \d{1,2}, \d{4})", row.get_text(strip=True))
+            if m:
+                current_date = datetime.strptime(m.group(1), "%B %d, %Y").date()
+            continue
+
+        row_id = row.get("id") or ""
+        if not row_id.startswith("eventRowId_") or current_date is None:
+            continue
+
+        currency = _cell_text(row, css_class="flagCur")
+        country = CURRENCY_TO_COUNTRY.get(currency)
+        if country is None:
+            continue
+
+        importance = _importance_from_icons(row.find("td", class_="sentiment"))
+        if importance is None or importance < INVESTING_MIN_IMPORTANCE:
+            continue
+
+        name = _cell_text(row, css_class="event")
+        if not name:
+            continue
+
+        events.append(
+            {
+                "date": current_date.isoformat(),
+                "time_kst": _cell_text(row, css_class="time") or "00:00",
+                "country": country,
+                "importance": min(importance, 3),
+                "name": name,
+                "actual": _cell_text(row, td_id_prefix="eventActual_"),
+                "forecast": _cell_text(row, td_id_prefix="eventForecast_"),
+                "previous": _cell_text(row, td_id_prefix="eventPrevious_"),
+                "is_released": _cell_text(row, td_id_prefix="eventActual_") is not None,
+            }
+        )
+    return events
+
+
+def _week_bounds(today_kst):
+    monday = today_kst - timedelta(days=today_kst.weekday())
+    return monday, monday + timedelta(days=6)
+
+
+def _cache_path(week_start):
+    return Path(CALENDAR_CACHE_TEMPLATE.format(week_start=week_start.isoformat()))
+
+
+def _load_cache(week_start):
+    path = _cache_path(week_start)
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
+
+
+def _save_cache(week_start, events):
+    path = _cache_path(week_start)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(events, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def collect_calendar(today_kst=None, force_full_fetch=None):
+    """Monday: full-week (re)fetch. Other weekdays: refresh only `actual` values
+    against the cached weekly schedule — this week's events rarely change, so
+    most weekday failures just mean "keep yesterday's schedule, retry actual
+    values tomorrow" instead of losing the whole section (SPEC.md §4.2)."""
+    today_kst = today_kst or datetime.now(ZoneInfo(KST)).date()
+    week_start, week_end = _week_bounds(today_kst)
+    is_monday = today_kst.weekday() == 0
+    need_full_fetch = is_monday if force_full_fetch is None else force_full_fetch
+    errors = []
+    cached = _load_cache(week_start)
+
+    try:
+        fresh_events = _parse_events(_fetch_html())
+        if not fresh_events:
+            raise ValueError("파싱된 이벤트 0건 — investing.com 마크업 구조 변경 가능성")
+    except Exception as exc:
+        logger.warning("calendar fetch/parse failed: %s", exc)
+        if cached is None:
+            return (
+                {"status": STATUS_FAILED, "week_start": week_start.isoformat(), "week_end": week_end.isoformat(), "events": []},
+                [{"section": "calendar", "reason": str(exc), "fallback": "캐시 없음"}],
+            )
+        return (
+            {"status": STATUS_STALE, "week_start": week_start.isoformat(), "week_end": week_end.isoformat(), "events": cached},
+            [{"section": "calendar", "reason": str(exc), "fallback": f"{week_start.isoformat()} 캐시 사용"}],
+        )
+
+    if need_full_fetch or cached is None:
+        _save_cache(week_start, fresh_events)
+        final_events = fresh_events
+    else:
+        # Patch `actual` into the cached schedule by (date, name); keep the rest as-is.
+        fresh_by_key = {(e["date"], e["name"]): e for e in fresh_events}
+        final_events = []
+        for e in cached:
+            match = fresh_by_key.get((e["date"], e["name"]))
+            final_events.append({**e, "actual": match["actual"], "is_released": match["is_released"]} if match else e)
+        _save_cache(week_start, final_events)
+
+    section = {"status": STATUS_OK, "week_start": week_start.isoformat(), "week_end": week_end.isoformat(), "events": final_events}
+    return section, errors
+
+
+if __name__ == "__main__":
+    import sys
+
+    sys.stdout.reconfigure(encoding="utf-8")  # Windows console defaults to cp949; Korean error text has non-cp949 punctuation
+    sys.stderr.reconfigure(encoding="utf-8")
+    logging.basicConfig(level=logging.INFO)
+    result_section, result_errors = collect_calendar()
+    print(json.dumps({"calendar": result_section, "errors": result_errors}, ensure_ascii=False, indent=2))
