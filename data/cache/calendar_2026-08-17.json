@@ -82,10 +82,10 @@
     "country": "US",
     "importance": 2,
     "name": "Building Permits (Jul)",
-    "actual": null,
+    "actual": "1.443M",
     "forecast": "1.370M",
     "previous": "1.374M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-18",
@@ -93,10 +93,10 @@
     "country": "US",
     "importance": 2,
     "name": "Export Price Index (MoM) (Jul)",
-    "actual": null,
+    "actual": "-1.3%",
     "forecast": "0.2%",
     "previous": "-0.6%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-18",
@@ -104,10 +104,10 @@
     "country": "US",
     "importance": 2,
     "name": "Housing Starts (MoM) (Jul)",
-    "actual": null,
+    "actual": "-12.4%",
     "forecast": null,
     "previous": "19.0%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-18",
@@ -115,10 +115,10 @@
     "country": "US",
     "importance": 2,
     "name": "Housing Starts (Jul)",
-    "actual": null,
+    "actual": "1.239M",
     "forecast": "1.350M",
     "previous": "1.427M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-18",
@@ -126,10 +126,10 @@
     "country": "US",
     "importance": 2,
     "name": "Import Price Index (MoM) (Jul)",
-    "actual": null,
+    "actual": "-0.4%",
     "forecast": "0.1%",
     "previous": "0.3%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-18",
@@ -137,10 +137,10 @@
     "country": "US",
     "importance": 2,
     "name": "Industrial Production (MoM) (Jul)",
-    "actual": null,
+    "actual": "0.2%",
     "forecast": "0.3%",
     "previous": "0.1%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-18",
@@ -148,10 +148,10 @@
     "country": "US",
     "importance": 2,
     "name": "Industrial Production (YoY) (Jul)",
-    "actual": null,
+    "actual": "1.08%",
     "forecast": null,
     "previous": "1.14%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-18",
@@ -159,10 +159,10 @@
     "country": "US",
     "importance": 2,
     "name": "Pending Home Sales (MoM) (Jul)",
-    "actual": null,
+    "actual": "-2.3%",
     "forecast": "0.1%",
     "previous": "-5.4%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-18",
@@ -170,10 +170,10 @@
     "country": "US",
     "importance": 2,
     "name": "Atlanta Fed GDPNow (Q3)",
-    "actual": null,
+    "actual": "4.0%",
     "forecast": "4.3%",
     "previous": "4.3%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-19",
@@ -181,10 +181,10 @@
     "country": "US",
     "importance": 2,
     "name": "API Weekly Crude Oil Stock",
-    "actual": null,
+    "actual": "-0.328M",
     "forecast": null,
     "previous": "9.072M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-19",
