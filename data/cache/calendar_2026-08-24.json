@@ -104,10 +104,10 @@
     "country": "US",
     "importance": 2,
     "name": "Core Durable Goods Orders (MoM) (Jul)",
-    "actual": null,
+    "actual": "0.4%",
     "forecast": "0.5%",
     "previous": "0.7%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-26",
@@ -115,10 +115,10 @@
     "country": "US",
     "importance": 3,
     "name": "Core PCE Price Index (MoM) (Jul)",
-    "actual": null,
+    "actual": "0.2%",
     "forecast": "0.2%",
     "previous": "0.1%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-26",
@@ -126,10 +126,10 @@
     "country": "US",
     "importance": 3,
     "name": "Core PCE Price Index (YoY) (Jul)",
-    "actual": null,
+    "actual": "3.3%",
     "forecast": "3.3%",
     "previous": "3.3%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-26",
@@ -137,10 +137,10 @@
     "country": "US",
     "importance": 2,
     "name": "Core PCE Prices (Q2)",
-    "actual": null,
+    "actual": "3.60%",
     "forecast": "3.40%",
     "previous": "3.40%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-26",
@@ -148,10 +148,10 @@
     "country": "US",
     "importance": 3,
     "name": "Durable Goods Orders (MoM) (Jul)",
-    "actual": null,
+    "actual": "1.1%",
     "forecast": "0.5%",
     "previous": "0.5%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-26",
@@ -159,10 +159,10 @@
     "country": "US",
     "importance": 3,
     "name": "GDP (QoQ) (Q2)",
-    "actual": null,
+    "actual": "1.5%",
     "forecast": "1.5%",
     "previous": "1.5%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-26",
@@ -170,10 +170,10 @@
     "country": "US",
     "importance": 2,
     "name": "GDP Price Index (QoQ) (Q2)",
-    "actual": null,
+    "actual": "6.4%",
     "forecast": "6.3%",
     "previous": "6.3%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-26",
@@ -181,10 +181,10 @@
     "country": "US",
     "importance": 2,
     "name": "PCE Price index (YoY) (Jul)",
-    "actual": null,
+    "actual": "3.7%",
     "forecast": null,
     "previous": "3.7%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-26",
@@ -192,10 +192,10 @@
     "country": "US",
     "importance": 2,
     "name": "PCE price index (MoM) (Jul)",
-    "actual": null,
+    "actual": "0.2%",
     "forecast": "0.1%",
     "previous": "-0.1%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-26",
@@ -203,10 +203,10 @@
     "country": "US",
     "importance": 2,
     "name": "Personal Spending (MoM) (Jul)",
-    "actual": null,
+    "actual": "0.2%",
     "forecast": "0.1%",
     "previous": "0.3%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-26",
@@ -214,10 +214,10 @@
     "country": "US",
     "importance": 2,
     "name": "Atlanta Fed GDPNow (Q3)",
-    "actual": null,
+    "actual": "4.6%",
     "forecast": "4.0%",
     "previous": "4.0%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-26",
@@ -225,10 +225,10 @@
     "country": "US",
     "importance": 3,
     "name": "Crude Oil Inventories",
-    "actual": null,
+    "actual": "0.095M",
     "forecast": null,
     "previous": "4.405M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-26",
@@ -236,10 +236,10 @@
     "country": "US",
     "importance": 2,
     "name": "Cushing Crude Oil Inventories",
-    "actual": null,
+    "actual": "1.176M",
     "forecast": null,
     "previous": "-1.314M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-27",
@@ -247,10 +247,10 @@
     "country": "US",
     "importance": 2,
     "name": "5-Year Note Auction",
-    "actual": null,
+    "actual": "4.393%",
     "forecast": null,
     "previous": "4.408%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-27",
