@@ -1,22 +1,22 @@
 {
   "status": "ok",
-  "source_date": "2026-08-26",
-  "source_url": "https://www.futures.co.kr/common/BbsFileDown.do;jsessionid=90F2D807BEFA51F541B1680B7D797479.KOR21?atchFileId=FILE_000000000033786&FileNm=NHF+Daily+Metal+Bulletin+20260826.pdf",
+  "source_date": "2026-08-27",
+  "source_url": "https://www.futures.co.kr/common/BbsFileDown.do;jsessionid=D240EC66A53D5B7EDD650F1D91A8DE53.KOR21?atchFileId=FILE_000000000033791&FileNm=NHF+Daily+Metal+Bulletin+20260827-re(3P+update).pdf",
   "lme": [
     {
       "metal": "Copper",
-      "prev": 238725,
-      "current": 237475,
-      "change": -1250,
+      "prev": 237475,
+      "current": 235575,
+      "change": -1900,
       "unit": "톤"
     }
   ],
   "comex": [
     {
       "metal": "Copper",
-      "prev": 744265,
-      "current": 745277,
-      "change": 1012,
+      "prev": 745277,
+      "current": 747039,
+      "change": 1762,
       "unit": "숏톤"
     }
   ]

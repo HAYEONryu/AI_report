@@ -269,10 +269,10 @@
     "country": "US",
     "importance": 2,
     "name": "Continuing Jobless Claims",
-    "actual": null,
+    "actual": "1,778K",
     "forecast": null,
     "previous": "1,799K",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-27",
@@ -280,10 +280,10 @@
     "country": "US",
     "importance": 2,
     "name": "Goods Trade Balance (Jul)",
-    "actual": null,
+    "actual": "-118.80B",
     "forecast": "-99.90B",
     "previous": "-101.41B",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-27",
@@ -291,10 +291,10 @@
     "country": "US",
     "importance": 3,
     "name": "Initial Jobless Claims",
-    "actual": null,
+    "actual": "203K",
     "forecast": "208K",
     "previous": "206K",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-27",
@@ -302,10 +302,10 @@
     "country": "US",
     "importance": 2,
     "name": "Retail Inventories Ex Auto (Jul)",
-    "actual": null,
+    "actual": "0.7%",
     "forecast": null,
     "previous": "-0.4%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-08-28",
