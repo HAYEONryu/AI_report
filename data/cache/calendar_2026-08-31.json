@@ -38,10 +38,10 @@
     "country": "US",
     "importance": 3,
     "name": "Chicago PMI (Aug)",
-    "actual": null,
+    "actual": "47.1",
     "forecast": "57.8",
     "previous": "57.6",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-01",
@@ -49,10 +49,10 @@
     "country": "CN",
     "importance": 2,
     "name": "RatingDog Manufacturing PMI (MoM) (Aug)",
-    "actual": null,
+    "actual": "51.5",
     "forecast": "51.5",
     "previous": "50.9",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-01",
