@@ -159,10 +159,10 @@
     "country": "US",
     "importance": 3,
     "name": "ADP Nonfarm Employment Change (Aug)",
-    "actual": null,
+    "actual": "38K",
     "forecast": "47K",
     "previous": "44K",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-02",
@@ -170,10 +170,10 @@
     "country": "US",
     "importance": 2,
     "name": "Factory Orders (MoM) (Jul)",
-    "actual": null,
+    "actual": "0.9%",
     "forecast": "0.6%",
     "previous": "-0.3%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-02",
@@ -181,10 +181,10 @@
     "country": "US",
     "importance": 3,
     "name": "Crude Oil Inventories",
-    "actual": null,
+    "actual": "-4.450M",
     "forecast": null,
     "previous": "0.095M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-02",
@@ -192,10 +192,10 @@
     "country": "US",
     "importance": 2,
     "name": "Cushing Crude Oil Inventories",
-    "actual": null,
+    "actual": "0.080M",
     "forecast": null,
     "previous": "1.176M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-03",
@@ -214,10 +214,10 @@
     "country": "CN",
     "importance": 2,
     "name": "RatingDog Services PMI (Aug)",
-    "actual": null,
+    "actual": "51.4",
     "forecast": "50.6",
     "previous": "50.4",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-03",
