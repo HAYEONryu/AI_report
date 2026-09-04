@@ -225,10 +225,10 @@
     "country": "US",
     "importance": 2,
     "name": "Continuing Jobless Claims",
-    "actual": null,
+    "actual": "1,779K",
     "forecast": null,
     "previous": "1,778K",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-03",
@@ -236,10 +236,10 @@
     "country": "US",
     "importance": 2,
     "name": "Exports (Jul)",
-    "actual": null,
+    "actual": "310.70B",
     "forecast": null,
     "previous": "314.70B",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-03",
@@ -258,10 +258,10 @@
     "country": "US",
     "importance": 2,
     "name": "Imports (Jul)",
-    "actual": null,
+    "actual": "399.30B",
     "forecast": null,
     "previous": "388.00B",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-03",
@@ -269,10 +269,10 @@
     "country": "US",
     "importance": 3,
     "name": "Initial Jobless Claims",
-    "actual": null,
+    "actual": "206K",
     "forecast": "205K",
     "previous": "203K",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-03",
@@ -280,10 +280,10 @@
     "country": "US",
     "importance": 2,
     "name": "Nonfarm Productivity (QoQ) (Q2)",
-    "actual": null,
+    "actual": "1.4%",
     "forecast": "1.4%",
     "previous": "1.4%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-03",
@@ -291,10 +291,10 @@
     "country": "US",
     "importance": 2,
     "name": "Trade Balance (Jul)",
-    "actual": null,
+    "actual": "-88.60B",
     "forecast": "-86.40B",
     "previous": "-73.30B",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-03",
@@ -302,10 +302,10 @@
     "country": "US",
     "importance": 2,
     "name": "Unit Labor Costs (QoQ) (Q2)",
-    "actual": null,
+    "actual": "1.2%",
     "forecast": "1.3%",
     "previous": "1.3%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-03",
@@ -313,10 +313,10 @@
     "country": "US",
     "importance": 2,
     "name": "S&P Global Composite PMI (Aug)",
-    "actual": null,
+    "actual": "56.0",
     "forecast": "56.0",
     "previous": "56.0",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-03",
@@ -324,10 +324,10 @@
     "country": "US",
     "importance": 3,
     "name": "S&P Global Services PMI (Aug)",
-    "actual": null,
+    "actual": "56.5",
     "forecast": "56.8",
     "previous": "56.8",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-03",
@@ -335,10 +335,10 @@
     "country": "US",
     "importance": 2,
     "name": "ISM Non-Manufacturing Employment (Aug)",
-    "actual": null,
+    "actual": "47.8",
     "forecast": null,
     "previous": "47.4",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-03",
@@ -346,10 +346,10 @@
     "country": "US",
     "importance": 3,
     "name": "ISM Non-Manufacturing PMI (Aug)",
-    "actual": null,
+    "actual": "55.4",
     "forecast": "54.1",
     "previous": "54.1",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-03",
@@ -357,10 +357,10 @@
     "country": "US",
     "importance": 3,
     "name": "ISM Non-Manufacturing Prices (Aug)",
-    "actual": null,
+    "actual": "72.6",
     "forecast": null,
     "previous": "70.3",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-04",
@@ -368,10 +368,10 @@
     "country": "US",
     "importance": 2,
     "name": "Atlanta Fed GDPNow (Q3)",
-    "actual": null,
+    "actual": "4.7%",
     "forecast": null,
     "previous": null,
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-04",
@@ -379,10 +379,10 @@
     "country": "US",
     "importance": 2,
     "name": "Fed's Balance Sheet",
-    "actual": null,
+    "actual": "6,737B",
     "forecast": null,
     "previous": "6,731B",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-04",
