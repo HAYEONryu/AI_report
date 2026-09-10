@@ -126,10 +126,10 @@
     "country": "US",
     "importance": 2,
     "name": "ADP Employment Change Weekly",
-    "actual": null,
+    "actual": "12.00K",
     "forecast": null,
     "previous": "11.80K",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-10",
@@ -148,10 +148,10 @@
     "country": "US",
     "importance": 3,
     "name": "10-Year Note Auction",
-    "actual": null,
+    "actual": "4.834%",
     "forecast": null,
     "previous": "4.683%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-10",
@@ -159,10 +159,10 @@
     "country": "US",
     "importance": 2,
     "name": "API Weekly Crude Oil Stock",
-    "actual": null,
+    "actual": "-0.300M",
     "forecast": null,
     "previous": "-2.600M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-10",
