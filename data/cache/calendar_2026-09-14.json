@@ -5,10 +5,10 @@
     "country": "CN",
     "importance": 2,
     "name": "New Loans (Aug)",
-    "actual": null,
+    "actual": "60.0B",
     "forecast": "480.0B",
     "previous": "-340.0B",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-15",
@@ -16,10 +16,10 @@
     "country": "CN",
     "importance": 2,
     "name": "Fixed Asset Investment (YoY) (Aug)",
-    "actual": null,
+    "actual": "-7.2%",
     "forecast": "-7.0%",
     "previous": "-6.7%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-15",
@@ -27,10 +27,10 @@
     "country": "CN",
     "importance": 2,
     "name": "Industrial Production (YoY) (Aug)",
-    "actual": null,
+    "actual": "5.2%",
     "forecast": "4.8%",
     "previous": "4.5%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-15",
@@ -38,10 +38,10 @@
     "country": "CN",
     "importance": 2,
     "name": "Chinese Industrial Production YTD  (YoY) (Aug)",
-    "actual": null,
+    "actual": "5.3%",
     "forecast": null,
     "previous": "5.3%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-15",
@@ -49,10 +49,10 @@
     "country": "CN",
     "importance": 2,
     "name": "Chinese Unemployment Rate (Aug)",
-    "actual": null,
+    "actual": "5.3%",
     "forecast": "5.2%",
     "previous": "5.2%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-15",
