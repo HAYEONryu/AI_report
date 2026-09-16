@@ -71,10 +71,10 @@
     "country": "US",
     "importance": 2,
     "name": "ADP Employment Change Weekly",
-    "actual": null,
+    "actual": "16.30K",
     "forecast": null,
     "previous": "12.00K",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-15",
@@ -82,10 +82,10 @@
     "country": "US",
     "importance": 2,
     "name": "NY Empire State Manufacturing Index (Sep)",
-    "actual": null,
+    "actual": "7.60",
     "forecast": "14.10",
     "previous": "20.60",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-16",
@@ -93,10 +93,10 @@
     "country": "US",
     "importance": 2,
     "name": "20-Year Bond Auction",
-    "actual": null,
+    "actual": "5.420%",
     "forecast": null,
     "previous": "5.204%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-16",
@@ -104,10 +104,10 @@
     "country": "US",
     "importance": 2,
     "name": "API Weekly Crude Oil Stock",
-    "actual": null,
+    "actual": "7.140M",
     "forecast": null,
     "previous": "-0.300M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-16",
