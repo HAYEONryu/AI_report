@@ -214,10 +214,10 @@
     "country": "US",
     "importance": 2,
     "name": "Atlanta Fed GDPNow (Q3)",
-    "actual": null,
+    "actual": "5.1%",
     "forecast": "4.4%",
     "previous": "4.4%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-17",
@@ -335,10 +335,10 @@
     "country": "US",
     "importance": 2,
     "name": "Building Permits (Aug)",
-    "actual": null,
+    "actual": "1.394M",
     "forecast": "1.400M",
     "previous": "1.433M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-17",
@@ -346,10 +346,10 @@
     "country": "US",
     "importance": 2,
     "name": "Continuing Jobless Claims",
-    "actual": null,
+    "actual": "1,730K",
     "forecast": null,
     "previous": "1,774K",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-17",
@@ -357,10 +357,10 @@
     "country": "US",
     "importance": 2,
     "name": "Housing Starts (Aug)",
-    "actual": null,
+    "actual": "1.275M",
     "forecast": "1.320M",
     "previous": "1.239M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-17",
@@ -368,10 +368,10 @@
     "country": "US",
     "importance": 2,
     "name": "Housing Starts (MoM) (Aug)",
-    "actual": null,
+    "actual": "-2.6%",
     "forecast": null,
     "previous": "-12.4%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-17",
@@ -379,10 +379,10 @@
     "country": "US",
     "importance": 3,
     "name": "Initial Jobless Claims",
-    "actual": null,
+    "actual": "196K",
     "forecast": "209K",
     "previous": "206K",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-17",
@@ -390,10 +390,10 @@
     "country": "US",
     "importance": 3,
     "name": "Philadelphia Fed Manufacturing Index (Sep)",
-    "actual": null,
+    "actual": "37.8",
     "forecast": "28.9",
     "previous": "47.4",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-17",
@@ -401,10 +401,10 @@
     "country": "US",
     "importance": 2,
     "name": "Philly Fed Employment (Sep)",
-    "actual": null,
+    "actual": "11.8",
     "forecast": null,
     "previous": "27.9",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-17",
@@ -412,10 +412,10 @@
     "country": "US",
     "importance": 2,
     "name": "Atlanta Fed GDPNow (Q3)",
-    "actual": null,
+    "actual": "5.1%",
     "forecast": null,
     "previous": null,
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-17",
@@ -423,10 +423,10 @@
     "country": "US",
     "importance": 2,
     "name": "Pending Home Sales (MoM) (Aug)",
-    "actual": null,
+    "actual": "0.3%",
     "forecast": "2.0%",
     "previous": "-2.3%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-18",
@@ -434,10 +434,10 @@
     "country": "US",
     "importance": 2,
     "name": "10-Year TIPS Auction",
-    "actual": null,
+    "actual": "2.653%",
     "forecast": null,
     "previous": "2.438%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-18",
@@ -445,10 +445,10 @@
     "country": "US",
     "importance": 2,
     "name": "Fed's Balance Sheet",
-    "actual": null,
+    "actual": "6,747B",
     "forecast": null,
     "previous": "6,741B",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-18",
