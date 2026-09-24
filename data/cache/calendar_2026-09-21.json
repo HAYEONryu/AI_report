@@ -71,10 +71,10 @@
     "country": "US",
     "importance": 3,
     "name": "S&P Global Manufacturing PMI (Sep)",
-    "actual": null,
+    "actual": "57.0",
     "forecast": "53.4",
     "previous": "53.9",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-23",
@@ -82,10 +82,10 @@
     "country": "US",
     "importance": 2,
     "name": "S&P Global Composite PMI (Sep)",
-    "actual": null,
+    "actual": "58.4",
     "forecast": null,
     "previous": "56.0",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-23",
@@ -93,10 +93,10 @@
     "country": "US",
     "importance": 3,
     "name": "S&P Global Services PMI (Sep)",
-    "actual": null,
+    "actual": "58.7",
     "forecast": "56.0",
     "previous": "56.5",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-23",
@@ -115,10 +115,10 @@
     "country": "US",
     "importance": 3,
     "name": "Crude Oil Inventories",
-    "actual": null,
+    "actual": "2.969M",
     "forecast": null,
     "previous": "-0.640M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-23",
@@ -126,10 +126,10 @@
     "country": "US",
     "importance": 2,
     "name": "Cushing Crude Oil Inventories",
-    "actual": null,
+    "actual": "2.266M",
     "forecast": null,
     "previous": "-0.342M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-24",
@@ -137,10 +137,10 @@
     "country": "US",
     "importance": 2,
     "name": "5-Year Note Auction",
-    "actual": null,
+    "actual": "5.033%",
     "forecast": null,
     "previous": "4.393%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-24",
