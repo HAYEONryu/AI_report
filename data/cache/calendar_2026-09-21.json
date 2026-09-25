@@ -159,10 +159,10 @@
     "country": "US",
     "importance": 2,
     "name": "Building Permits (Aug)",
-    "actual": null,
+    "actual": "1.403M",
     "forecast": "1.394M",
     "previous": "1.433M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-24",
@@ -170,10 +170,10 @@
     "country": "US",
     "importance": 2,
     "name": "Continuing Jobless Claims",
-    "actual": null,
+    "actual": "1,719K",
     "forecast": null,
     "previous": "1,730K",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-24",
@@ -181,10 +181,10 @@
     "country": "US",
     "importance": 2,
     "name": "Current Account (Q2)",
-    "actual": null,
+    "actual": "-246.0B",
     "forecast": "-259.0B",
     "previous": "-226.8B",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-24",
@@ -192,10 +192,10 @@
     "country": "US",
     "importance": 3,
     "name": "Initial Jobless Claims",
-    "actual": null,
+    "actual": "197K",
     "forecast": "201K",
     "previous": "196K",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-24",
@@ -203,10 +203,10 @@
     "country": "US",
     "importance": 3,
     "name": "New Home Sales (Aug)",
-    "actual": null,
+    "actual": "684K",
     "forecast": "619K",
     "previous": "607K",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-24",
@@ -214,10 +214,10 @@
     "country": "US",
     "importance": 2,
     "name": "New Home Sales (MoM) (Aug)",
-    "actual": null,
+    "actual": "6.4%",
     "forecast": null,
     "previous": "-10.5%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-25",
@@ -225,10 +225,10 @@
     "country": "US",
     "importance": 2,
     "name": "7-Year Note Auction",
-    "actual": null,
+    "actual": "5.085%",
     "forecast": null,
     "previous": "4.512%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-25",
@@ -236,10 +236,10 @@
     "country": "US",
     "importance": 2,
     "name": "Fed's Balance Sheet",
-    "actual": null,
+    "actual": "6,748B",
     "forecast": null,
     "previous": "6,747B",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-25",
