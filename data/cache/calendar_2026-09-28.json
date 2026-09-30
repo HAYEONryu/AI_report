@@ -16,10 +16,10 @@
     "country": "US",
     "importance": 2,
     "name": "S&P/CS HPI Composite - 20 n.s.a. (YoY) (Jul)",
-    "actual": null,
+    "actual": "2.5%",
     "forecast": "2.2%",
     "previous": "2.1%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-29",
@@ -27,10 +27,10 @@
     "country": "US",
     "importance": 2,
     "name": "S&P/CS HPI Composite - 20 n.s.a. (MoM) (Jul)",
-    "actual": null,
+    "actual": "0.0%",
     "forecast": null,
     "previous": "0.4%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-29",
@@ -38,10 +38,10 @@
     "country": "US",
     "importance": 3,
     "name": "CB Consumer Confidence (Sep)",
-    "actual": null,
+    "actual": "81.9",
     "forecast": "90.1",
     "previous": "89.4",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-29",
@@ -49,10 +49,10 @@
     "country": "US",
     "importance": 3,
     "name": "JOLTS Job Openings (Aug)",
-    "actual": null,
+    "actual": "7.079M",
     "forecast": "7.230M",
     "previous": "7.271M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -104,10 +104,10 @@
     "country": "US",
     "importance": 2,
     "name": "API Weekly Crude Oil Stock",
-    "actual": null,
+    "actual": "1.019M",
     "forecast": null,
     "previous": "1.786M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -115,10 +115,10 @@
     "country": "CN",
     "importance": 2,
     "name": "Chinese Composite PMI (Sep)",
-    "actual": null,
+    "actual": "50.7",
     "forecast": null,
     "previous": "49.5",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -126,10 +126,10 @@
     "country": "CN",
     "importance": 3,
     "name": "Manufacturing PMI (Sep)",
-    "actual": null,
+    "actual": "50.1",
     "forecast": "50.1",
     "previous": "49.8",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -137,10 +137,10 @@
     "country": "CN",
     "importance": 2,
     "name": "Non-Manufacturing PMI (Sep)",
-    "actual": null,
+    "actual": "50.2",
     "forecast": "49.3",
     "previous": "49.0",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -148,10 +148,10 @@
     "country": "CN",
     "importance": 2,
     "name": "RatingDog Manufacturing PMI (MoM) (Sep)",
-    "actual": null,
+    "actual": "52.1",
     "forecast": "51.7",
     "previous": "51.5",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -159,10 +159,10 @@
     "country": "CN",
     "importance": 2,
     "name": "RatingDog Services PMI (Sep)",
-    "actual": null,
+    "actual": "51.6",
     "forecast": "51.2",
     "previous": "51.4",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
