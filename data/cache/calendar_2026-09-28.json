@@ -170,10 +170,10 @@
     "country": "US",
     "importance": 3,
     "name": "ADP Nonfarm Employment Change (Sep)",
-    "actual": null,
+    "actual": "90K",
     "forecast": "70K",
     "previous": "38K",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -181,10 +181,10 @@
     "country": "US",
     "importance": 3,
     "name": "Core PCE Price Index (MoM) (Aug)",
-    "actual": null,
+    "actual": "0.2%",
     "forecast": "0.3%",
     "previous": "0.2%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -192,10 +192,10 @@
     "country": "US",
     "importance": 3,
     "name": "Core PCE Price Index (YoY) (Aug)",
-    "actual": null,
+    "actual": "3.0%",
     "forecast": "3.4%",
     "previous": "3.3%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -203,10 +203,10 @@
     "country": "US",
     "importance": 2,
     "name": "Core PCE Prices (Q2)",
-    "actual": null,
+    "actual": "3.30%",
     "forecast": "3.60%",
     "previous": "3.60%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -214,10 +214,10 @@
     "country": "US",
     "importance": 3,
     "name": "GDP (QoQ) (Q2)",
-    "actual": null,
+    "actual": "2.2%",
     "forecast": "1.5%",
     "previous": "1.5%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -225,10 +225,10 @@
     "country": "US",
     "importance": 2,
     "name": "GDP Price Index (QoQ) (Q2)",
-    "actual": null,
+    "actual": "6.1%",
     "forecast": "6.4%",
     "previous": "6.4%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -236,10 +236,10 @@
     "country": "US",
     "importance": 2,
     "name": "Goods Trade Balance (Aug)",
-    "actual": null,
+    "actual": "-132.60B",
     "forecast": "-113.80B",
     "previous": "-118.94B",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -247,10 +247,10 @@
     "country": "US",
     "importance": 2,
     "name": "PCE price index (MoM) (Aug)",
-    "actual": null,
+    "actual": "0.3%",
     "forecast": "0.4%",
     "previous": "0.2%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -258,10 +258,10 @@
     "country": "US",
     "importance": 2,
     "name": "PCE Price index (YoY) (Aug)",
-    "actual": null,
+    "actual": "3.4%",
     "forecast": null,
     "previous": "3.7%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -269,10 +269,10 @@
     "country": "US",
     "importance": 2,
     "name": "Personal Spending (MoM) (Aug)",
-    "actual": null,
+    "actual": "0.9%",
     "forecast": "1.0%",
     "previous": "0.2%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -280,10 +280,10 @@
     "country": "US",
     "importance": 2,
     "name": "Retail Inventories Ex Auto (Aug)",
-    "actual": null,
+    "actual": "0.1%",
     "forecast": null,
     "previous": "0.8%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -291,10 +291,10 @@
     "country": "US",
     "importance": 3,
     "name": "Chicago PMI (Sep)",
-    "actual": null,
+    "actual": "58.8",
     "forecast": "51.3",
     "previous": "47.1",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -302,10 +302,10 @@
     "country": "US",
     "importance": 2,
     "name": "Atlanta Fed GDPNow (Q3)",
-    "actual": null,
+    "actual": "3.7%",
     "forecast": null,
     "previous": null,
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -313,10 +313,10 @@
     "country": "US",
     "importance": 3,
     "name": "Crude Oil Inventories",
-    "actual": null,
+    "actual": "0.922M",
     "forecast": null,
     "previous": "2.969M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-09-30",
@@ -324,10 +324,10 @@
     "country": "US",
     "importance": 2,
     "name": "Cushing Crude Oil Inventories",
-    "actual": null,
+    "actual": "0.553M",
     "forecast": null,
     "previous": "2.266M",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-10-01",
