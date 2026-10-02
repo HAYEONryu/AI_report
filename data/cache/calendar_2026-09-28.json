@@ -346,10 +346,10 @@
     "country": "US",
     "importance": 2,
     "name": "Continuing Jobless Claims",
-    "actual": null,
+    "actual": "1,701K",
     "forecast": null,
     "previous": "1,719K",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-10-01",
@@ -357,10 +357,10 @@
     "country": "US",
     "importance": 3,
     "name": "Initial Jobless Claims",
-    "actual": null,
+    "actual": "197K",
     "forecast": "199K",
     "previous": "197K",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-10-01",
@@ -368,10 +368,10 @@
     "country": "US",
     "importance": 3,
     "name": "S&P Global Manufacturing PMI (Sep)",
-    "actual": null,
+    "actual": "55.9",
     "forecast": "57.0",
     "previous": "57.0",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-10-01",
@@ -379,10 +379,10 @@
     "country": "US",
     "importance": 2,
     "name": "Construction Spending (MoM) (Aug)",
-    "actual": null,
+    "actual": "0.9%",
     "forecast": "0.1%",
     "previous": "-0.5%",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-10-01",
@@ -401,10 +401,10 @@
     "country": "US",
     "importance": 2,
     "name": "ISM Manufacturing Employment (Sep)",
-    "actual": null,
+    "actual": "52.7",
     "forecast": null,
     "previous": "51.2",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-10-01",
@@ -412,10 +412,10 @@
     "country": "US",
     "importance": 3,
     "name": "ISM Manufacturing PMI (Sep)",
-    "actual": null,
+    "actual": "54.5",
     "forecast": "55.0",
     "previous": "54.6",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-10-01",
@@ -423,10 +423,10 @@
     "country": "US",
     "importance": 3,
     "name": "ISM Manufacturing Prices (Sep)",
-    "actual": null,
+    "actual": "77.9",
     "forecast": "72.0",
     "previous": "71.1",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-10-02",
@@ -434,10 +434,10 @@
     "country": "US",
     "importance": 2,
     "name": "Atlanta Fed GDPNow (Q3)",
-    "actual": null,
+    "actual": "3.7%",
     "forecast": null,
     "previous": null,
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-10-02",
@@ -467,10 +467,10 @@
     "country": "US",
     "importance": 2,
     "name": "Fed's Balance Sheet",
-    "actual": null,
+    "actual": "6,743B",
     "forecast": null,
     "previous": "6,748B",
-    "is_released": false
+    "is_released": true
   },
   {
     "date": "2026-10-02",
